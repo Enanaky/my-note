@@ -134,7 +134,7 @@ nav i.material-icons {
 .new-note {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 40%;
   align-self: center;
   margin-top: 15px;
 }
@@ -144,8 +144,6 @@ nav i.material-icons {
   border: 1px solid rgb(133, 131, 131);
   border-radius: 5px;
   padding: 5px;
-}
-.title-input {
 }
 .content-input {
   margin-bottom: 0;

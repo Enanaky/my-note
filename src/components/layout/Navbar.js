@@ -1,8 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Navbar(props) {
+  const [view, setView] = useState({
+    grid: true,
+    darkMode: false
+  });
+
   //SEARCH HANDLER---
   function handleSubmit(e) {
     e.preventDefault();
@@ -11,6 +15,32 @@ export default function Navbar(props) {
   }
   function xButton() {
     document.getElementById('search').value = '';
+  }
+
+  //CHANGE THE VIEW MODEL GRID vs LIST
+  function changeView() {
+    if (view.grid === true) {
+      setView({ ...view, grid: false });
+      document.querySelector('.view-grid').classList.add('disabled');
+      document.querySelector('.view-list').classList.remove('disabled');
+    }
+    if (view.grid === false) {
+      setView({ ...view, grid: true });
+      document.querySelector('.view-grid').classList.remove('disabled');
+      document.querySelector('.view-list').classList.add('disabled');
+    }
+  }
+
+  //CHANGE THE DARKMODE
+  function changeMode() {
+    if (view.darkMode === false) {
+      setView({ ...view, darkMode: true });
+      document.querySelector('.view-icon').classList.remove('dark');
+    }
+    if (view.darkMode === true) {
+      setView({ ...view, darkMode: false });
+      document.querySelector('.view-icon').classList.add('dark');
+    }
   }
 
   return (
@@ -40,15 +70,15 @@ export default function Navbar(props) {
             <i className="large material-icons">add</i>
           </Link>
 
-          <a onClick={props.changeView} className="a-icon view-grid ">
+          <a onClick={changeView} className="a-icon view-grid ">
             <i className="large material-icons view-grid">view_module</i>
           </a>
 
-          <a onClick={props.changeView} className="a-icon view-list disabled">
+          <a onClick={changeView} className="a-icon view-list disabled">
             <i className="large material-icons">view_stream</i>
           </a>
 
-          <a onClick={props.changeMode} className="mode-icon">
+          <a onClick={changeMode} className="mode-icon">
             <i className="large material-icons view-icon dark">visibility</i>
           </a>
           <a href="/" className="a-icon">
@@ -59,9 +89,3 @@ export default function Navbar(props) {
     </>
   );
 }
-
-Navbar.propTypes = {
-  handleSearch: PropTypes.func.isRequired,
-  changeView: PropTypes.func.isRequired,
-  changeMode: PropTypes.func.isRequired
-};
