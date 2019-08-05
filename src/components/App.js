@@ -1,17 +1,19 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import React from 'react';
 
-import Login from "./Login";
-import Home from "./Home";
+import { ToastContainer } from 'react-toastify';
+
+import Navbar from './layout/Navbar';
+import SideNav from './layout/SideNav';
+import Routes from './Routes';
+import Footer from './layout/Footer';
 
 export default function App() {
   return (
-    <div className="container-app">
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route path="/home" component={Home} />
-      </Switch>
+    <div className="app">
+      <Navbar />
+      <SideNav />
+      <Routes />
+      <Footer />
       <ToastContainer autoClose={2000} hideProgressBar />
     </div>
   );
