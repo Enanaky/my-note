@@ -61,7 +61,7 @@ export default function Navbar(props) {
           </div>
         </div>
         <div className="logo">
-          <Link to="/notes" className="logo">
+          <Link to="/dashboard" className="logo">
             Logo
           </Link>
         </div>

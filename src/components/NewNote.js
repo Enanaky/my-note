@@ -26,6 +26,7 @@ function NewNote(props) {
   function handleSubmit(event) {
     event.preventDefault();
     props.dispatch(noteActions.createNote(note));
+    event.currentTarget.reset();
   }
 
   return (

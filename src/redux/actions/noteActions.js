@@ -1,3 +1,6 @@
 export function createNote(note) {
-  return { type: "CREATE_NOTE", note };
+  return (dispatch, getState) => {
+    //make async call to database
+    dispatch({ type: 'CREATE_NOTE', note });
+  };
 }
