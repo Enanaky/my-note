@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 
-export default function Navbar(props) {
+function Navbar() {
   const [view, setView] = useState({
     grid: true,
     darkMode: false
   });
 
   //SEARCH HANDLER---
-  function handleSubmit(e) {
-    e.preventDefault();
-    props.handleSearch(document.getElementById('search').value);
-    document.getElementById('search').value = '';
-  }
-  function xButton() {
-    document.getElementById('search').value = '';
-  }
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   props.handleSearch(document.getElementById('search').value);
+  //   document.getElementById('search').value = '';
+  // }
+  // function xButton() {
+  //   document.getElementById('search').value = '';
+  // }
 
   //CHANGE THE VIEW MODEL GRID vs LIST
   function changeView() {
@@ -51,12 +52,10 @@ export default function Navbar(props) {
             <i className="large material-icons menu-icon">menu</i>
           </a>
           <div className="input-field search-bar">
-            <form className="search-bar" onSubmit={handleSubmit}>
+            <form className="search-bar">
               <i className="large material-icons menu-icon">search</i>
               <input id="search" type="search" required />
-              <i className="material-icons" onClick={xButton}>
-                close
-              </i>
+              <i className="material-icons">close</i>
             </form>
           </div>
         </div>
@@ -89,3 +88,8 @@ export default function Navbar(props) {
     </>
   );
 }
+// Navbar.propTypes = {
+//   handleSearch: PropTypes.func.isRequired
+// };
+
+export default Navbar;

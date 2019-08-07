@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 
 function NewNote(props) {
   const [note, setNote] = useState({
-    type: null,
-    id: null,
+    type: 'note',
     title: null,
     content: null
   });

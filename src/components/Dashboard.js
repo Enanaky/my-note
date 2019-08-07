@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 import NewNote from './NewNote';
 import MiniNote from './MiniNote';
@@ -24,9 +26,14 @@ Dashboard.propTypes = {
 };
 
 function mapStateToProps(state) {
+  console.log(state);
+
   return {
-    notes: state.notes
+    notes: state.firestore.ordered.notes
   };
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: 'notes' }])
+)(Dashboard);
