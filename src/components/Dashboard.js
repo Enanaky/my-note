@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
+import Navbar from './Navbar';
 import NewNote from './NewNote';
-import MiniNote from './MiniNote';
+import NoteList from './layout/NoteList';
+import SideNav from './layout/SideNav';
 
-function Dashboard({ notes }) {
+function Dashboard(props) {
   const [note, setNote] = useState();
+  const { notes, auth } = props;
 
   function handleClick(id) {
     notes.forEach(note => {
@@ -20,26 +23,23 @@ function Dashboard({ notes }) {
 
   return (
     <div className="dashboard">
+      <Navbar />
       <NewNote note={note} />
-      <ul className="note-list" data-isotope='{ "itemSelector": ".note", "layoutMode": "masonry" }'>
-        {notes &&
-          notes.map(note => {
-            return <MiniNote note={note} key={note.id} handleClick={handleClick} />;
-          })}
-      </ul>
+      <NoteList notes={notes} handleClick={handleClick} />
+      <SideNav />
     </div>
   );
 }
 
 Dashboard.propTypes = {
-  notes: PropTypes.array.isRequired
+  notes: PropTypes.array,
+  auth: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-  console.log('state', state);
-
   return {
-    notes: state.firestore.ordered.notes
+    notes: state.firestore.ordered.notes,
+    auth: state.firebase.auth
   };
 }
 

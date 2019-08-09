@@ -9,6 +9,7 @@ import App from './components/App';
 
 const store = configureStore();
 
+// store.firebaseAuthIsReady.then(() => {
 render(
   <Provider store={store}>
     <Router>
@@ -17,3 +18,4 @@ render(
   </Provider>,
   document.getElementById('root')
 );
+// });

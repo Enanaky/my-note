@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
   state = {
@@ -91,10 +92,13 @@ class SignUp extends Component {
               />
             </div>
           </div>
-          <div className="input-field center">
+          <div className="input-field" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <button className="btn pink waves-effect waves-light lighten-1 z-depth-0">
               Sign Up
             </button>
+            <Link to="/" className="btn pink waves-effect waves-light lighten-1 z-depth-0">
+              Log in
+            </Link>
           </div>
         </form>
       </div>

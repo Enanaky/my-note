@@ -17,7 +17,7 @@ export default function configureStore() {
         reduxImmutableStateInvariant()
       ),
       reduxFirestore(fbConfig),
-      reactReduxFirebase(fbConfig)
+      reactReduxFirebase(fbConfig, { attachAuthIsReady: true })
     )
   );
 }

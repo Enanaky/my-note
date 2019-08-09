@@ -12,7 +12,6 @@ function NewNote(props) {
     title: null,
     content: null
   });
-  console.log('rendering...');
 
   function handleChange(event) {
     switch (event.target.name) {
@@ -28,8 +27,13 @@ function NewNote(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     props.dispatch(noteActions.createNote(newNote));
     event.currentTarget.reset();
+  }
+
+  function handleDiscard(event) {
+    console.log(event.target);
   }
 
   if (props.note) {
@@ -39,13 +43,18 @@ function NewNote(props) {
           note={props.note.note}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
+          handleDiscard={handleDiscard}
         />
       </div>
     );
   } else {
     return (
       <div className="new-note">
-        <NewNoteForm handleSubmit={handleSubmit} handleChange={handleChange} />
+        <NewNoteForm
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          handleDiscard={handleDiscard}
+        />
       </div>
     );
   }
@@ -53,7 +62,7 @@ function NewNote(props) {
 
 NewNote.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  note: PropTypes.object.isRequired
+  note: PropTypes.object
 };
 
 function mapStateToProps() {

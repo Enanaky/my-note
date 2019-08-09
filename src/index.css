@@ -74,9 +74,9 @@ body {
 .sidenav {
   top: 56px;
 }
-nav a.sidenav {
+/* nav a.sidenav {
   display: ;
-}
+} */
 .search-bar {
   width: 100%;
   display: flex;
@@ -129,6 +129,40 @@ nav i.material-icons {
   nav a.sidenav-trigger {
     display: block;
   }
+}
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+  height: 100%;
+}
+.dropdown-trigger {
+  margin: 0 !important;
+}
+.dropdown-content {
+  top: 56px !important;
+  width: 200px !important;
+  height: 96px !important;
+  border-radius: 5px;
+}
+.container-user {
+  display: flex;
+  flex-direction: column;
+  width: 200px !important;
+  height: 96px !important;
+  padding: 5px !important;
+}
+.user-data {
+  display: flex;
+  height: 60%;
+}
+.button-logout {
+  align-self: center;
+  height: 40%;
+  display: flex;
+  padding: 0;
+  margin: 0;
 }
 /*----------- New Note ------------*/
 .new-note {
