@@ -7,11 +7,11 @@ import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import fbConfig from '../config/fbConfig';
 
 export default function configureStore() {
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //This is useful only on development
+  const composes = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //This is useful only on development
 
   return createStore(
     rootReducer,
-    composeEnhancers(
+    composes(
       applyMiddleware(
         thunk.withExtraArgument({ getFirebase, getFirestore }),
         reduxImmutableStateInvariant()

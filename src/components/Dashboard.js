@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -11,20 +11,29 @@ import SideNav from './layout/SideNav';
 
 function Dashboard(props) {
   const [note, setNote] = useState();
-  const { notes, auth } = props;
+  const [mustDisplayNewNote, setMustDisplayNewNote] = useState(false);
+
+  const { notes } = props;
+  // display: 'none'
 
   function handleClick(id) {
     notes.forEach(note => {
       if (note.id === id) {
         setNote({ note });
+        setMustDisplayNewNote(true);
       }
     });
   }
-
+  // onClick={() => setMustDisplayNewNote(false)}
   return (
     <div className="dashboard">
       <Navbar />
-      <NewNote note={note} />
+
+      {mustDisplayNewNote === true ? (
+        <div className="new-note-container">
+          <NewNote note={note} setMustDisplayNewNote={setMustDisplayNewNote} />
+        </div>
+      ) : null}
       <NoteList notes={notes} handleClick={handleClick} />
       <SideNav />
     </div>
@@ -37,6 +46,8 @@ Dashboard.propTypes = {
 };
 
 function mapStateToProps(state) {
+  console.log(state);
+
   return {
     notes: state.firestore.ordered.notes,
     auth: state.firebase.auth

@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 export default function NewNoteForm(props) {
+  useEffect(() => {
+    const counter = document.querySelectorAll('textarea#title-note,textarea#content');
+    // eslint-disable-next-line no-undef
+    M.CharacterCounter.init(counter);
+  }, []);
+
   return (
     <form className="new-note-form" onSubmit={props.handleSubmit}>
       <div className="row input-field title-input">

@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function SideNav() {
+  useEffect(() => {
+    var elems = document.querySelector('.sidenav');
+    // eslint-disable-next-line no-undef
+    M.Sidenav.init(elems);
+  }, []);
+
   return (
     <ul id="slide-out" className="sidenav">
       <li>

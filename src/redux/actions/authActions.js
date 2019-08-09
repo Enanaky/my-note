@@ -13,7 +13,7 @@ export const signIn = credentials => {
       });
   };
 };
-export const logOut = () => {
+export const logOutAction = () => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
 

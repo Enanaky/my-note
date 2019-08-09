@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
 import configureStore from './redux/configureStore';
 import { Provider } from 'react-redux';
 
@@ -9,13 +8,12 @@ import App from './components/App';
 
 const store = configureStore();
 
-// store.firebaseAuthIsReady.then(() => {
-render(
-  <Provider store={store}>
-    <Router>
+store.firebaseAuthIsReady.then(() => {
+  console.log('firebaseAuthIsReady');
+  render(
+    <Provider store={store}>
       <App />
-    </Router>
-  </Provider>,
-  document.getElementById('root')
-);
-// });
+    </Provider>,
+    document.getElementById('root')
+  );
+});

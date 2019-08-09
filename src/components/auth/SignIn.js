@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -20,9 +20,10 @@ function SignIn(props) {
     e.preventDefault();
     props.signIn(userInput);
   }
+
+  if (auth.uid) return <Redirect to="/dashboard" />;
   return (
     <div className="container">
-      {!auth.isEmpty ? <Redirect to="/dashboard" /> : null}
       <form className="white signIn-form" id="form" onSubmit={handleSubmit}>
         <h5 className="grey-text text-darken-3 center">Login</h5>
         <div className="row input-container email">
@@ -65,8 +66,6 @@ SignIn.propTypes = {
   signIn: PropTypes.func.isRequired
 };
 const mapStateToProps = state => {
-  console.log(state);
-
   return {
     authError: state.auth.authError,
     auth: state.firebase.auth
