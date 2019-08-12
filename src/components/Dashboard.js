@@ -14,27 +14,30 @@ function Dashboard(props) {
   const [mustDisplayNewNote, setMustDisplayNewNote] = useState(false);
 
   const { notes } = props;
-  // display: 'none'
 
-  function handleClick(id) {
-    notes.forEach(note => {
-      if (note.id === id) {
-        setNote({ note });
-        setMustDisplayNewNote(true);
-      }
-    });
+  function newNoteOn(id) {
+    notes
+      ? notes.forEach(note => {
+          if (note.id === id) {
+            setNote({ note });
+          }
+        })
+      : null;
+    setMustDisplayNewNote(true);
   }
-  // onClick={() => setMustDisplayNewNote(false)}
+  function newNoteOff() {
+    setMustDisplayNewNote(false);
+  }
+
   return (
     <div className="dashboard">
-      <Navbar />
-
+      <Navbar newNoteOn={newNoteOn} />
       {mustDisplayNewNote === true ? (
         <div className="new-note-container">
-          <NewNote note={note} setMustDisplayNewNote={setMustDisplayNewNote} />
+          <NewNote note={note} newNoteOff={newNoteOff} />
         </div>
       ) : null}
-      <NoteList notes={notes} handleClick={handleClick} />
+      <NoteList notes={notes} newNoteOn={newNoteOn} />
       <SideNav />
     </div>
   );
@@ -56,5 +59,13 @@ function mapStateToProps(state) {
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: 'notes' }])
+  firestoreConnect(props => {
+    if (!props.auth.uid) return [];
+    return [
+      {
+        collection: 'notes',
+        where: [['authorId', '==', props.auth.uid]]
+      }
+    ];
+  })
 )(Dashboard);

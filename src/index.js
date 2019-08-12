@@ -9,7 +9,6 @@ import App from './components/App';
 const store = configureStore();
 
 store.firebaseAuthIsReady.then(() => {
-  console.log('firebaseAuthIsReady');
   render(
     <Provider store={store}>
       <App />

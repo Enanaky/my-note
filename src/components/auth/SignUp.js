@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router';
+
+import { signUp } from '../../redux/actions/authActions';
 
 class SignUp extends Component {
   state = {
@@ -10,8 +15,6 @@ class SignUp extends Component {
     password: ''
   };
   handleChange = e => {
-    console.log(e.target.id);
-
     this.setState({
       [e.target.id]: e.target.value
     });
@@ -19,9 +22,10 @@ class SignUp extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    document.getElementById('form').reset();
+    this.props.signUp(this.state);
   };
   render() {
+    if (this.props.auth.uid) return <Redirect to="/dashboard" />;
     return (
       <div className="container">
         <form className="white signUp-form" id="form" onSubmit={this.handleSubmit}>
@@ -92,6 +96,9 @@ class SignUp extends Component {
               />
             </div>
           </div>
+          <div className="red-text center">
+            {this.props.authError ? <p>{this.props.authError}</p> : null}
+          </div>
           <div className="input-field" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <button className="btn pink waves-effect waves-light lighten-1 z-depth-0">
               Sign Up
@@ -106,4 +113,26 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+SignUp.propTypes = {
+  authError: PropTypes.string,
+  auth: PropTypes.object.isRequired,
+  signUp: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: newUser => dispatch(signUp(newUser))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);

@@ -2,14 +2,18 @@ export function createNote(note) {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     //make async call to database
     const firestore = getFirestore();
+    const profile = getState().firebase.profile;
+    const authorId = getState().firebase.auth.uid;
+
     firestore
       .collection('notes')
       .add({
         ...note,
-        authorFirstName: 'Juan',
-        authorLastName: 'Petrone',
-        authorId: 12345,
-        createdAt: new Date()
+        authorFirstName: profile.firstName,
+        authorLastName: profile.lastName,
+        authorId: authorId,
+        created: new Date(),
+        lastUpdate: new Date()
       })
       .then(() => {
         dispatch({ type: 'CREATE_NOTE', note });

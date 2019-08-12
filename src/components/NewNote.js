@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import * as noteActions from '../redux/actions/noteActions';
+import { createNote } from '../redux/actions/noteActions';
 import PropTypes from 'prop-types';
 
 import NewNoteForm from './layout/NewNoteForm';
@@ -27,13 +27,9 @@ function NewNote(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    props.dispatch(noteActions.createNote(newNote));
+    props.createNote(newNote);
     event.currentTarget.reset();
-  }
-
-  function handleDiscard(event) {
-    console.log(event.target);
+    props.newNoteOff();
   }
 
   if (props.note) {
@@ -43,30 +39,34 @@ function NewNote(props) {
           note={props.note.note}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
-          handleDiscard={handleDiscard}
         />
       </div>
     );
   } else {
     return (
       <div className="new-note">
-        <NewNoteForm
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          handleDiscard={handleDiscard}
-        />
+        <NewNoteForm handleSubmit={handleSubmit} handleChange={handleChange} />
       </div>
     );
   }
 }
 
 NewNote.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   note: PropTypes.object
 };
 
-function mapStateToProps() {
-  return {};
-}
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth.uid
+  };
+};
 
-export default connect(mapStateToProps)(NewNote);
+const mapDispatchToProps = dispatch => {
+  return {
+    createNote: newNote => dispatch(createNote(newNote))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewNote);

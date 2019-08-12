@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 export default function EditNoteForm(props) {
-  const { title, content } = props.note;
+  const { title, content, lastUpdate } = props.note;
 
   useEffect(() => {
     const counter = document.querySelectorAll('textarea#title-note,textarea#content');
@@ -23,6 +24,7 @@ export default function EditNoteForm(props) {
           maxLength="50"
           key={title}
           defaultValue={title}
+          autoFocus
         />
         <label htmlFor="title active" className="active">
           Title
@@ -44,6 +46,9 @@ export default function EditNoteForm(props) {
           Content
         </label>
       </div>
+      <p className="last-update grey-text flex-end">
+        Last update: {moment(lastUpdate.toDate()).calendar()}
+      </p>
       <div className="save-input-button">
         <button type="submit" className="btn pink waves-effect waves-light save-input">
           Save

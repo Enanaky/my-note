@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import User from './User';
 
@@ -67,9 +67,11 @@ class Navbar extends React.Component {
             </Link>
           </div>
           <div className="nav-buttons">
-            <Link to="/note/new-note" className="button-icon">
-              <i className="large material-icons">add</i>
-            </Link>
+            <a className="button-icon">
+              <i className="large material-icons" onClick={() => this.props.newNoteOn()}>
+                add
+              </i>
+            </a>
             <a onClick={this.changeView} className="a-icon view-grid ">
               <i className="large material-icons view-grid">view_module</i>
             </a>
@@ -87,4 +89,7 @@ class Navbar extends React.Component {
   }
 }
 
+Navbar.propTypes = {
+  newNoteOn: PropTypes.func.isRequired
+};
 export default Navbar;

@@ -25,3 +25,31 @@ export const logOutAction = () => {
       });
   };
 };
+
+export const signUp = newUser => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firebase = getFirebase();
+    const firestore = getFirestore();
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(newUser.email, newUser.password)
+      .then(res => {
+        return firestore
+          .collection('users')
+          .doc(res.user.uid)
+          .set({
+            firstName: newUser.first_name,
+            lastName: newUser.last_name,
+            initials: newUser.first_name[0] + newUser.last_name[0],
+            gender: newUser.gender
+          });
+      })
+      .then(() => {
+        dispatch({ type: 'SIGNUP_SUCCESS' });
+      })
+      .catch(err => {
+        dispatch({ type: 'SIGNUP_ERROR', err });
+      });
+  };
+};

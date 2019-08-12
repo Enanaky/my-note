@@ -6,28 +6,29 @@ import { Redirect } from 'react-router';
 import { logOutAction } from '../redux/actions/authActions';
 
 function User(props) {
+  const { logOut, auth, profile } = props;
   useEffect(() => {
     let dropdown = document.querySelector('.dropdown-trigger');
     // eslint-disable-next-line no-undef
     M.Dropdown.init(dropdown, { hover: false, alignment: 'left' });
   }, []);
 
-  if (!props.auth.uid) return <Redirect to="/" />;
+  if (!auth.uid) return <Redirect to="/" />;
   return (
     <div className="user">
-      <a className="dropdown-trigger" data-target="dropdown1" onClick={() => console.log('user')}>
-        <i className="large material-icons">person</i>
+      <a
+        className="dropdown-trigger btn-floating"
+        data-target="dropdown1"
+        onClick={() => console.log('user')}
+      >
+        <p className="initials">{profile.initials}</p>
       </a>
       <ul id="dropdown1" className="dropdown-content">
         <ul className="container-user">
-          <div className="user-data">
-            <li>Nombre Apellido</li>
-            <i className="large material-icons dark">person</i>
+          <div className="user-name">
+            <li>{profile.firstName + ' ' + profile.lastName}</li>
           </div>
-          <button
-            className="btn pink waves-effect waves-light button-logout"
-            onClick={props.logOut}
-          >
+          <button className="btn pink waves-effect waves-light button-logout" onClick={logOut}>
             Log out
           </button>
         </ul>
@@ -39,12 +40,14 @@ function User(props) {
 
 User.propTypes = {
   logOut: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 
