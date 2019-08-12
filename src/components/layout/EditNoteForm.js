@@ -33,7 +33,7 @@ export default function EditNoteForm(props) {
       <div className="row input-field content-input">
         <textarea
           id="content"
-          className="materialize-textarea"
+          className="materialize-textarea content-textarea"
           name="content"
           onChange={props.handleChange}
           required
@@ -41,6 +41,7 @@ export default function EditNoteForm(props) {
           maxLength="2500"
           key={content}
           defaultValue={content}
+          rows="15"
         />
         <label htmlFor="textarea" className="active">
           Content
@@ -52,6 +53,9 @@ export default function EditNoteForm(props) {
       <div className="save-input-button">
         <button type="submit" className="btn pink waves-effect waves-light save-input">
           Save
+        </button>
+        <button type="delete" className="btn red waves-effect waves-light delete-input">
+          Delete
         </button>
       </div>
     </form>

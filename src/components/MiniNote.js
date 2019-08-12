@@ -7,8 +7,8 @@ export default function MiniNote(props) {
   return (
     <div className="note" key={title} onClick={() => props.newNoteOn(id)}>
       <div className="note-inner">
-        <li className="note-title">{title}</li>
-        <li className="note-content">{content}</li>
+        <p className="note-title">{title}</p>
+        <p className="note-content">{content}</p>
       </div>
     </div>
   );

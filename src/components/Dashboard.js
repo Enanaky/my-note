@@ -64,6 +64,7 @@ export default compose(
     return [
       {
         collection: 'notes',
+        orderBy: ['lastUpdate', 'desc'],
         where: [['authorId', '==', props.auth.uid]]
       }
     ];

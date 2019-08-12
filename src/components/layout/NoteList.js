@@ -6,12 +6,14 @@ import MiniNote from '../MiniNote';
 export default function NoteList(props) {
   const { notes, newNoteOn } = props;
   return (
-    <ul className="note-list" data-isotope='{ "itemSelector": ".note", "layoutMode": "masonry" }'>
-      {notes &&
-        notes.map(note => {
-          return <MiniNote note={note} key={note.id} newNoteOn={newNoteOn} />;
-        })}
-    </ul>
+    <div className="notes-container">
+      <ul className="note-list" data-isotope='{ "itemSelector": ".note", "layoutMode": "masonry" }'>
+        {notes &&
+          notes.map(note => {
+            return <MiniNote note={note} key={note.id} newNoteOn={newNoteOn} />;
+          })}
+      </ul>
+    </div>
   );
 }
 
