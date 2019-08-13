@@ -1,5 +1,5 @@
 export function createNote(note) {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
+  return (dispatch, getState, { getFirestore }) => {
     //make async call to database
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
@@ -20,6 +20,23 @@ export function createNote(note) {
       })
       .catch(err => {
         dispatch({ type: 'CREATE_NOTE_ERROR', err });
+      });
+  };
+}
+
+export function deleteNote(id) {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection('notes')
+      .doc(id)
+      .delete()
+      .then(() => {
+        dispatch({ type: 'DELETE_NOTE', id });
+      })
+      .catch(err => {
+        dispatch({ type: 'DELETE_NOTE_ERROR', err });
       });
   };
 }

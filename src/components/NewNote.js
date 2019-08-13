@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { createNote } from '../redux/actions/noteActions';
+import { createNote, deleteNote } from '../redux/actions/noteActions';
 import PropTypes from 'prop-types';
 
 import NewNoteForm from './layout/NewNoteForm';
@@ -32,6 +32,11 @@ function NewNote(props) {
     props.newNoteOff();
   }
 
+  function deleteNote(id) {
+    console.log(id);
+    props.deleteNote(id);
+  }
+
   if (props.note) {
     return (
       <div className="new-note">
@@ -39,13 +44,20 @@ function NewNote(props) {
           note={props.note.note}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
+          newNoteOff={props.newNoteOff}
+          deleteNote={deleteNote}
         />
       </div>
     );
   } else {
     return (
       <div className="new-note">
-        <NewNoteForm handleSubmit={handleSubmit} handleChange={handleChange} />
+        <NewNoteForm
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          newNoteOff={props.newNoteOff}
+          deleteNote={deleteNote}
+        />
       </div>
     );
   }
@@ -63,7 +75,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createNote: newNote => dispatch(createNote(newNote))
+    createNote: newNote => dispatch(createNote(newNote)),
+    deleteNote: id => dispatch(deleteNote(id))
   };
 };
 export default connect(

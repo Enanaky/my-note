@@ -1,15 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 export default function NewNoteForm(props) {
+  const node = useRef();
+
   useEffect(() => {
     const counter = document.querySelectorAll('textarea#title-note,textarea#content');
     // eslint-disable-next-line no-undef
     M.CharacterCounter.init(counter);
   }, []);
 
+  useEffect(() => {
+    document.addEventListener('click', closePanel);
+    return () => {
+      document.removeEventListener('click', closePanel);
+    };
+  }, []);
+
+  function closePanel(e) {
+    if (node.current.contains(e.target)) {
+      // inside click
+      return;
+    }
+    // outside click
+    props.newNoteOff();
+  }
   return (
-    <form className="new-note-form" onSubmit={props.handleSubmit}>
+    <form className="new-note-form" onSubmit={props.handleSubmit} ref={node}>
       <div className="row input-field title-input">
         <textarea
           id="title-note"
@@ -46,5 +63,6 @@ export default function NewNoteForm(props) {
 }
 NewNoteForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired
+  handleChange: PropTypes.func.isRequired,
+  newNoteOff: PropTypes.func.isRequired
 };

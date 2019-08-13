@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
 export default function EditNoteForm(props) {
-  const { title, content, lastUpdate } = props.note;
+  const { title, content, lastUpdate, id } = props.note;
+  const node = useRef();
+  console.log(node);
 
   useEffect(() => {
     const counter = document.querySelectorAll('textarea#title-note,textarea#content');
@@ -11,8 +13,31 @@ export default function EditNoteForm(props) {
     M.CharacterCounter.init(counter);
   }, []);
 
+  useEffect(() => {
+    document.addEventListener('click', closePanel);
+    return () => {
+      document.removeEventListener('click', closePanel);
+    };
+  }, []);
+
+  function closePanel(e) {
+    if (node.current.contains(e.target)) {
+      // inside click
+      return;
+    }
+    // outside click
+    props.newNoteOff();
+  }
+
+  function handleClick(e) {
+    e.preventDefault();
+    props.newNoteOff();
+    console.log(id);
+    props.deleteNote(id);
+  }
+
   return (
-    <form className="new-note-form" onSubmit={props.handleSubmit}>
+    <form className="new-note-form" onSubmit={props.handleSubmit} ref={node}>
       <div className="row input-field title-input">
         <textarea
           id="title-note"
@@ -47,15 +72,20 @@ export default function EditNoteForm(props) {
           Content
         </label>
       </div>
-      <p className="last-update grey-text flex-end">
-        Last update: {moment(lastUpdate.toDate()).calendar()}
-      </p>
+      <div className="tools-container">
+        <div className="tools">
+          <i className="material-icons tool-icon" onClick={handleClick}>
+            delete
+          </i>
+          <i className="material-icons tool-icon">color_lens</i>
+        </div>
+        <p className="last-update grey-text flex-end">
+          Last update: {moment(lastUpdate.toDate()).calendar()}
+        </p>
+      </div>
       <div className="save-input-button">
-        <button type="submit" className="btn pink waves-effect waves-light save-input">
-          Save
-        </button>
-        <button type="delete" className="btn red waves-effect waves-light delete-input">
-          Delete
+        <button type="submit" className="save-input">
+          Cerrar
         </button>
       </div>
     </form>
@@ -64,5 +94,7 @@ export default function EditNoteForm(props) {
 EditNoteForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
-  note: PropTypes.object.isRequired
+  note: PropTypes.object.isRequired,
+  deleteNote: PropTypes.func.isRequired,
+  newNoteOff: PropTypes.func.isRequired
 };

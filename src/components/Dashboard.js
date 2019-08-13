@@ -27,6 +27,7 @@ function Dashboard(props) {
   }
   function newNoteOff() {
     setMustDisplayNewNote(false);
+    setNote();
   }
 
   return (
