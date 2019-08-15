@@ -40,3 +40,22 @@ export function deleteNote(id) {
       });
   };
 }
+export function updateNote(id, changes) {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection('notes')
+      .doc(id)
+      .update({
+        title: changes.title,
+        content: changes.content
+      })
+      .then(() => {
+        dispatch({ type: 'UPDATE_NOTE', id });
+      })
+      .catch(err => {
+        dispatch({ type: 'UPDATE_NOTE_ERROR', err });
+      });
+  };
+}

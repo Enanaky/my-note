@@ -5,7 +5,6 @@ import moment from 'moment';
 export default function EditNoteForm(props) {
   const { title, content, lastUpdate, id } = props.note;
   const node = useRef();
-  console.log(node);
 
   useEffect(() => {
     const counter = document.querySelectorAll('textarea#title-note,textarea#content');
@@ -14,26 +13,19 @@ export default function EditNoteForm(props) {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('click', closePanel);
+    document.addEventListener('click', clickLocation);
     return () => {
-      document.removeEventListener('click', closePanel);
+      document.removeEventListener('click', clickLocation);
     };
   }, []);
 
-  function closePanel(e) {
+  function clickLocation(e) {
     if (node.current.contains(e.target)) {
       // inside click
       return;
     }
     // outside click
-    props.newNoteOff();
-  }
-
-  function handleClick(e) {
-    e.preventDefault();
-    props.newNoteOff();
-    console.log(id);
-    props.deleteNote(id);
+    props.updateChanges(id);
   }
 
   return (
@@ -43,7 +35,7 @@ export default function EditNoteForm(props) {
           id="title-note"
           className="materialize-textarea"
           name="title"
-          onChange={props.handleChange}
+          onChange={e => props.handleChange(e, content)}
           required
           data-length="50"
           maxLength="50"
@@ -60,7 +52,7 @@ export default function EditNoteForm(props) {
           id="content"
           className="materialize-textarea content-textarea"
           name="content"
-          onChange={props.handleChange}
+          onChange={e => props.handleChange(e, title)}
           required
           data-length="2500"
           maxLength="2500"
@@ -74,7 +66,7 @@ export default function EditNoteForm(props) {
       </div>
       <div className="tools-container">
         <div className="tools">
-          <i className="material-icons tool-icon" onClick={handleClick}>
+          <i className="material-icons tool-icon" onClick={() => props.handleDelete(id)}>
             delete
           </i>
           <i className="material-icons tool-icon">color_lens</i>
@@ -95,6 +87,6 @@ EditNoteForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   note: PropTypes.object.isRequired,
-  deleteNote: PropTypes.func.isRequired,
-  newNoteOff: PropTypes.func.isRequired
+  handleDelete: PropTypes.func.isRequired,
+  updateChanges: PropTypes.func.isRequired
 };

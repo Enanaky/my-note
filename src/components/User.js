@@ -19,7 +19,7 @@ function User(props) {
       <a
         className="dropdown-trigger btn-floating"
         data-target="dropdown1"
-        onClick={() => console.log('user')}
+        // onClick={() => console.log('user')}
       >
         <p className="initials">{profile.initials}</p>
       </a>

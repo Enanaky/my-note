@@ -25,6 +25,7 @@ export default function NewNoteForm(props) {
     // outside click
     props.newNoteOff();
   }
+
   return (
     <form className="new-note-form" onSubmit={props.handleSubmit} ref={node}>
       <div className="row input-field title-input">
