@@ -49,7 +49,8 @@ export function updateNote(id, changes) {
       .doc(id)
       .update({
         title: changes.title,
-        content: changes.content
+        content: changes.content,
+        lastUpdate: new Date()
       })
       .then(() => {
         dispatch({ type: 'UPDATE_NOTE', id });

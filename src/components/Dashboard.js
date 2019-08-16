@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import Navbar from './Navbar';
 import NewNote from './NewNote';
 import NoteList from './layout/NoteList';
+import NoteGrid from './layout/NoteGrid';
 import SideNav from './layout/SideNav';
 
 function Dashboard(props) {
@@ -38,7 +39,7 @@ function Dashboard(props) {
           <NewNote note={note} newNoteOff={newNoteOff} />
         </div>
       ) : null}
-      <NoteList notes={notes} newNoteOn={newNoteOn} />
+      <NoteGrid notes={notes} newNoteOn={newNoteOn} />
       <SideNav />
     </div>
   );
@@ -50,7 +51,7 @@ Dashboard.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log(state);
+  // console.log(state);
 
   return {
     notes: state.firestore.ordered.notes,
