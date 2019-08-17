@@ -9,14 +9,13 @@ export default function NoteGrid(props) {
     masonryLayout(
       document.querySelector('.notes-container'),
       document.querySelectorAll('.note'),
-      3
+      4
     );
   });
 
   function masonryLayout(container, items, columns) {
     if (props.notes) {
       if (container) {
-        container.classList.add('masonry-layout', `columns-${columns}`);
         let columnsElements = [];
         //Creating the columns...
         for (let i = 1; i <= columns; i++) {
