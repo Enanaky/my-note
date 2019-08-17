@@ -269,13 +269,13 @@ i.medium {
 }
 .note-column {
   display: flex;
-  width: 30%;
+  width: 20%;
   margin: 15px 7px 0 7px;
   flex-direction: column;
-  background-color: #e77c7c;
+  /* background-color: #e77c7c; */
 }
 .note {
-  background-color: #bbbaba;
+  background-color: #fffbfb;
   border: 1px solid rgb(187, 186, 186);
   border-radius: 5px;
   min-height: 100px;

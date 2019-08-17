@@ -6,7 +6,7 @@ import { compose } from 'redux';
 
 import Navbar from './Navbar';
 import NewNote from './NewNote';
-import NoteList from './layout/NoteList';
+// import NoteList from './layout/NoteList';
 import NoteGrid from './layout/NoteGrid';
 import SideNav from './layout/SideNav';
 
