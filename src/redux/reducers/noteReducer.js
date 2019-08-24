@@ -10,7 +10,6 @@ export default function noteReducer(state = [], action) {
       console.log('note deleted!');
       // eslint-disable-next-line no-case-declarations
       const newState = state.filter(note => note.id !== action.id);
-      console.log(newState);
       return newState;
     case 'DELETE_NOTE_ERROR':
       console.log('delete note error', action.err);

@@ -68,7 +68,7 @@ class Navbar extends React.Component {
           </div>
           <div className="nav-buttons">
             <a className="button-icon">
-              <i className="large material-icons" onClick={() => this.props.newNoteOn()}>
+              <i className="large material-icons" onClick={() => this.props.formOn()}>
                 add
               </i>
             </a>
@@ -90,6 +90,6 @@ class Navbar extends React.Component {
 }
 
 Navbar.propTypes = {
-  newNoteOn: PropTypes.func.isRequired
+  formOn: PropTypes.func.isRequired
 };
 export default Navbar;

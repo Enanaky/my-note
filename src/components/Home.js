@@ -10,13 +10,11 @@ import NewNote from './NewNote';
 import NoteGrid from './layout/NoteGrid';
 import SideNav from './layout/SideNav';
 
-function Dashboard(props) {
+function Home({ notes }) {
   const [note, setNote] = useState();
   const [mustDisplayNewNote, setMustDisplayNewNote] = useState(false);
 
-  const { notes } = props;
-
-  function newNoteOn(id) {
+  function formOn(id) {
     notes
       ? notes.forEach(note => {
           if (note.id === id) {
@@ -26,26 +24,28 @@ function Dashboard(props) {
       : null;
     setMustDisplayNewNote(true);
   }
-  function newNoteOff() {
+  function formOff() {
     setMustDisplayNewNote(false);
     setNote();
   }
 
   return (
-    <div className="dashboard">
-      <Navbar newNoteOn={newNoteOn} />
+    <div className="Home">
+      <Navbar formOn={formOn} />
       {mustDisplayNewNote === true ? (
         <div className="new-note-container">
-          <NewNote note={note} newNoteOff={newNoteOff} />
+          <NewNote note={note} formOff={formOff} />
         </div>
       ) : null}
-      <NoteGrid notes={notes} newNoteOn={newNoteOn} />
+      <div className="dashboard">
+        <NoteGrid notes={notes} formOn={formOn} />
+      </div>
       <SideNav />
     </div>
   );
 }
 
-Dashboard.propTypes = {
+Home.propTypes = {
   notes: PropTypes.array,
   auth: PropTypes.object.isRequired
 };
@@ -71,4 +71,4 @@ export default compose(
       }
     ];
   })
-)(Dashboard);
+)(Home);

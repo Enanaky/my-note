@@ -22,8 +22,7 @@ export default function NewNoteForm(props) {
       // inside click
       return;
     }
-    // outside click
-    props.newNoteOff();
+    props.formOff();
   }
 
   return (
@@ -65,5 +64,5 @@ export default function NewNoteForm(props) {
 NewNoteForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
-  newNoteOff: PropTypes.func.isRequired
+  formOff: PropTypes.func.isRequired
 };

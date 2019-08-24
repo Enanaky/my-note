@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import SignIn from './auth/SignIn';
 import SignUp from './auth/SignUp';
-import Dashboard from './Dashboard';
+import Home from './Home';
 
 export default function Routes() {
   return (
@@ -11,7 +11,7 @@ export default function Routes() {
       <Switch>
         <Route exact path="/" component={SignIn} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={Home} />
       </Switch>
     </BrowserRouter>
   );

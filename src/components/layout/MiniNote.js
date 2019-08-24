@@ -5,7 +5,7 @@ export default function MiniNote(props) {
   const { title, content, id } = props.note;
 
   return (
-    <div className="note" key={title} onClick={() => props.newNoteOn(id)}>
+    <div className="note" key={title} onClick={() => props.formOn(id)}>
       <div className="note-inner">
         <p className="note-title">{title}</p>
         <p className="note-content">{content}</p>
@@ -16,5 +16,5 @@ export default function MiniNote(props) {
 
 MiniNote.propTypes = {
   note: PropTypes.object.isRequired,
-  newNoteOn: PropTypes.func.isRequired
+  formOn: PropTypes.func.isRequired
 };

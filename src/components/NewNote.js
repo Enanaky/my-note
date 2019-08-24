@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as noteActions from '../redux/actions/noteActions';
 import PropTypes from 'prop-types';
@@ -7,30 +7,39 @@ import NewNoteForm from './layout/NewNoteForm';
 import EditNoteForm from './layout/EditNoteForm';
 
 function NewNote(props) {
-  const [newNote, setNewNote] = useState({
+  const [form, setForm] = useState({
     type: 'note',
     title: null,
     content: null
   });
 
-  function handleChange(event, defaultContent) {
+  useEffect(() => {
+    // If I am editin an existing note...
+    if (props.note) {
+      setForm({ ...form, title: props.note.note.title, content: props.note.note.content });
+    }
+  }, []);
+
+  function handleChange(event) {
+    // If I want to edit a note...
     if (props.note) {
       switch (event.target.name) {
         case 'title':
-          setNewNote({ ...newNote, title: event.target.value, content: defaultContent });
+          setForm({ ...form, title: event.target.value });
           break;
         case 'content':
-          setNewNote({ ...newNote, title: defaultContent, content: event.target.value });
+          setForm({ ...form, content: event.target.value });
           break;
         default:
       }
     } else {
+      // If I want to create a note...
       switch (event.target.name) {
         case 'title':
-          setNewNote({ ...newNote, title: event.target.value });
+          setForm({ ...form, title: event.target.value });
           break;
         case 'content':
-          setNewNote({ ...newNote, content: event.target.value });
+          setForm({ ...form, content: event.target.value });
           break;
         default:
       }
@@ -38,29 +47,32 @@ function NewNote(props) {
   }
 
   function submitForm(event) {
-    //if the note already exist, just update it...
     if (props.note) {
+      //if the note already exist, just update it...
       event.preventDefault();
-      updateChanges(newNote, props.note.note.id);
+      updateChanges(props.note.note.id, form);
     } else {
       //if it's a new note then create one...
+      console.log('Submiting form...');
+
       event.preventDefault();
-      props.create(newNote);
-      props.newNoteOff();
+      props.create(form);
+      props.formOff();
     }
   }
 
-  function updateChanges(changes, id) {
-    props.newNoteOff();
+  function updateChanges(id, changes) {
+    props.formOff();
     console.log('updating note: ', id);
     props.update(id, changes);
   }
 
   function handleDelete(id) {
     console.log('deleting note: ', id);
-    props.newNoteOff();
+    props.formOff();
     props.delete(id);
   }
+
   if (props.note) {
     return (
       <div className="new-note">
@@ -68,8 +80,9 @@ function NewNote(props) {
           note={props.note.note}
           handleSubmit={submitForm}
           handleChange={handleChange}
-          updateChanges={updateChanges}
+          formOff={props.formOff}
           handleDelete={handleDelete}
+          form={form}
         />
       </div>
     );
@@ -79,8 +92,7 @@ function NewNote(props) {
         <NewNoteForm
           handleSubmit={submitForm}
           handleChange={handleChange}
-          newNoteOff={props.newNoteOff}
-          // deleteNote={deleteNote}
+          formOff={props.formOff}
         />
       </div>
     );
@@ -99,9 +111,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    create: newNote => dispatch(noteActions.createNote(newNote)),
+    create: form => dispatch(noteActions.createNote(form)),
     delete: id => dispatch(noteActions.deleteNote(id)),
-    update: (id, newNote) => dispatch(noteActions.updateNote(id, newNote))
+    update: (id, form) => dispatch(noteActions.updateNote(id, form))
   };
 };
 export default connect(

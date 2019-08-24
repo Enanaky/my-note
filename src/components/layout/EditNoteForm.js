@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
@@ -19,13 +19,24 @@ export default function EditNoteForm(props) {
     };
   }, []);
 
-  function clickLocation(e) {
+  async function clickLocation(e) {
     if (node.current.contains(e.target)) {
       // inside click
       return;
     }
     // outside click
-    props.updateChanges(id);
+    props.formOff();
+  }
+
+  function getHeight() {
+    let intro = 0;
+    for (let i = 0; i < content.length; i++) {
+      if (content[i] === '\n' || content[i] === '\r') {
+        intro++;
+      }
+    }
+    const base = 45;
+    return base + Math.floor(content.length / 77 + intro) * 18;
   }
 
   return (
@@ -35,13 +46,12 @@ export default function EditNoteForm(props) {
           id="title-note"
           className="materialize-textarea"
           name="title"
-          onChange={e => props.handleChange(e, content)}
+          onChange={e => props.handleChange(e)}
           required
           data-length="50"
           maxLength="50"
           key={title}
           defaultValue={title}
-          autoFocus
         />
         <label htmlFor="title active" className="active">
           Title
@@ -52,32 +62,31 @@ export default function EditNoteForm(props) {
           id="content"
           className="materialize-textarea content-textarea"
           name="content"
-          onChange={e => props.handleChange(e, title)}
+          onChange={e => props.handleChange(e)}
           required
           data-length="2500"
           maxLength="2500"
           key={content}
           defaultValue={content}
-          rows="15"
+          style={{ height: `${getHeight()}px` }}
+          autoFocus
         />
         <label htmlFor="textarea" className="active">
           Content
         </label>
       </div>
-      <div className="tools-container">
+      <p className="last-update grey-text flex-end">
+        Last update: {moment(lastUpdate.toDate()).calendar()}
+      </p>
+      <div className="tools-save-container">
         <div className="tools">
           <i className="material-icons tool-icon" onClick={() => props.handleDelete(id)}>
             delete
           </i>
           <i className="material-icons tool-icon">color_lens</i>
         </div>
-        <p className="last-update grey-text flex-end">
-          Last update: {moment(lastUpdate.toDate()).calendar()}
-        </p>
-      </div>
-      <div className="save-input-button">
         <button type="submit" className="save-input">
-          Cerrar
+          Save
         </button>
       </div>
     </form>
@@ -88,5 +97,5 @@ EditNoteForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
   note: PropTypes.object.isRequired,
   handleDelete: PropTypes.func.isRequired,
-  updateChanges: PropTypes.func.isRequired
+  formOff: PropTypes.func.isRequired
 };

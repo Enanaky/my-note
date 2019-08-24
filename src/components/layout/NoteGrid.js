@@ -1,49 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import moment from 'moment';
+import moment from 'moment';
 
 import MiniNote from './MiniNote';
 
-export default function NoteGrid(props) {
+export default function NoteGrid({ notes, formOn }) {
+  const [sorted, setSorted] = useState(null);
   useEffect(() => {
-    masonryLayout(
-      document.querySelector('.notes-container'),
-      document.querySelectorAll('.note'),
-      4
-    );
-  });
-
-  function masonryLayout(container, items, columns) {
-    if (props.notes) {
-      if (container) {
-        let columnsElements = [];
-        //Creating the columns...
-        for (let i = 1; i <= columns; i++) {
-          let column = document.createElement('div');
-          column.classList.add('masonry-column', `column-${i}`);
-          container.appendChild(column);
-          columnsElements.push(column);
-        }
-        //inserting items inside the columns...
-        for (let m = 0; m < Math.ceil(items.length / columns); m++) {
-          for (let n = 0; n < columns; n++) {
-            let item = items[m * columns + n];
-            if (item) {
-              columnsElements[n].appendChild(item);
-              item.classList.add('masonry-item');
-            }
-          }
-        }
-      }
+    if (notes) {
+      let sortedNotes = notes.sort(function(n1, n2) {
+        let a = moment(n1.lastUpdate.toDate());
+        let b = moment(n2.lastUpdate.toDate());
+        if (a > b) return -1;
+        if (a < b) return 1;
+        return 0;
+      });
+      setSorted(sortedNotes);
     }
-  }
-
-  console.log('rendering');
-  if (props.notes) {
+  }, [notes]);
+  // console.log('sorted');
+  if (sorted) {
     return (
       <div className="notes-container">
-        {props.notes.map(note => {
-          return <MiniNote note={note} key={note.id} newNoteOn={props.newNoteOn} />;
+        {sorted.map(note => {
+          return <MiniNote note={note} key={note.id} formOn={formOn} />;
         })}
       </div>
     );
@@ -54,13 +34,5 @@ export default function NoteGrid(props) {
 
 NoteGrid.propTypes = {
   notes: PropTypes.array,
-  newNoteOn: PropTypes.func.isRequired
+  formOn: PropTypes.func.isRequired
 };
-
-// let sortedNotes = props.notes.sort(function(n1, n2) {
-//   let a = moment(n1.lastUpdate.toDate());
-//   let b = moment(n2.lastUpdate.toDate());
-//   if (a > b) return -1;
-//   if (a < b) return 1;
-//   return 0;
-// });
