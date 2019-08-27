@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
@@ -36,7 +36,7 @@ export default function EditNoteForm(props) {
       }
     }
     const base = 45;
-    return base + Math.floor(content.length / 77 + intro) * 18;
+    return base + Math.floor(content.length / 70 + intro * 0.2) * 17;
   }
 
   return (
@@ -69,7 +69,6 @@ export default function EditNoteForm(props) {
           key={content}
           defaultValue={content}
           style={{ height: `${getHeight()}px` }}
-          autoFocus
         />
         <label htmlFor="textarea" className="active">
           Content

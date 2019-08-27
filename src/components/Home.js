@@ -30,7 +30,7 @@ function Home({ notes }) {
   }
 
   return (
-    <div className="Home">
+    <div className="home">
       <Navbar formOn={formOn} />
       {mustDisplayNewNote === true ? (
         <div className="new-note-container">

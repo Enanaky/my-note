@@ -63,7 +63,7 @@ class Navbar extends React.Component {
           </div>
           <div className="logo">
             <Link to="/dashboard" className="logo">
-              <img src="./src/logo.png" />
+              logo
             </Link>
           </div>
           <div className="nav-buttons">

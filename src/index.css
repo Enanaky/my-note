@@ -1,11 +1,11 @@
 #root {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 html {
   margin: 0;
 }
 body {
-  overflow: hidden;
+  /* overflow: scroll; */
   margin: 0;
 }
 .app {
@@ -13,11 +13,11 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 .home {
   display: flex;
   flex-direction: column;
+  /* overflow: hidden; */
 }
 /*----------- SIGN-FORMS ------------*/
 .container {
@@ -213,6 +213,8 @@ nav i.material-icons {
   margin: 0;
   text-align-last: end;
   align-self: flex-end;
+  color: #eca3a0 !important;
+  font-size: 12px;
 }
 .tools-save-container {
   display: flex;
@@ -225,7 +227,7 @@ nav i.material-icons {
   height: 32px;
   border: none;
   border-radius: 9px;
-  color: #9b7f80;
+  color: #26a59a;
   font-size: 24px;
   padding: 0 !important;
 }
@@ -243,7 +245,6 @@ nav i.material-icons {
   width: 50%;
   align-items: flex-end;
 }
-
 .tool-icon {
   cursor: pointer;
   border-radius: 9px;
@@ -258,31 +259,29 @@ nav i.material-icons {
 i.medium {
   font-size: 2.7rem;
 }
+.home {
+  height: 100%;
+  /* overflow: ; */
+}
 /*----------- Dashboard ------------*/
 .dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  overflow: scroll !important;
 }
 /*----------- Note List ------------*/
 .notes-container {
-  width: 71%;
+  width: 1027px;
   height: 100%;
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  margin: 0 100px;
-  overflow: scroll;
+  margin: 0;
+  /* overflow: scroll !important; */
   background-color: rgba(243, 186, 186, 0.541);
 }
-.masonry-column {
-  display: flex;
-  width: 240px;
-
-  margin: 15px 7px 0 7px;
-  flex-direction: column;
-  /* background-color: #e77c7c; */
+.note-column {
 }
 .note {
   background-color: #fffbfb;
@@ -294,6 +293,11 @@ i.medium {
   word-wrap: break-word;
   margin: 0.667%;
   box-shadow: 0px 3px 4px 0px rgba(16, 16, 16, 0.5);
+  cursor: pointer;
+  margin: 0 3px 6px 3px;
+}
+.note:hover {
+  box-shadow: -1px 2px 13px 3px rgba(239, 107, 112, 0.74);
 }
 .note-inner {
   display: flex;
@@ -307,4 +311,14 @@ i.medium {
   border-bottom: 1px solid #bbbaba;
 }
 .note-content {
+  color: black;
+  resize: none;
+  /* overflow: hidden; */
+  border: none;
+  letter-spacing: 0.01428571em;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 0.875rem;
+  min-height: 45px !important;
+  max-height: 400px !important;
+  cursor: pointer;
 }
