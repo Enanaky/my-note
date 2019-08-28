@@ -14,6 +14,8 @@ function Home({ notes }) {
   const [note, setNote] = useState();
   const [mustDisplayNewNote, setMustDisplayNewNote] = useState(false);
 
+  // useEffect(() => {}, [notes]);
+
   function formOn(id) {
     notes
       ? notes.forEach(note => {
@@ -39,6 +41,7 @@ function Home({ notes }) {
       ) : null}
       <div className="dashboard">
         <NoteGrid notes={notes} formOn={formOn} />
+        {/* <NoteList notes={notes} formOn={formOn} /> */}
       </div>
       <SideNav />
     </div>
@@ -51,7 +54,7 @@ Home.propTypes = {
 };
 
 function mapStateToProps(state) {
-  // console.log(state);
+  console.log(state.firestore.ordered.notes);
 
   return {
     notes: state.firestore.ordered.notes,

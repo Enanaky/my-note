@@ -25,7 +25,7 @@ export default function EditNoteForm(props) {
       return;
     }
     // outside click
-    props.formOff();
+    // props.formOff();
   }
 
   function getHeight() {
@@ -36,57 +36,64 @@ export default function EditNoteForm(props) {
       }
     }
     const base = 45;
-    return base + Math.floor(content.length / 70 + intro * 0.2) * 17;
+    return base + Math.floor(content.length / 70 + intro * 0.6) * 17;
   }
 
+  function handleClose(e) {
+    e.preventDefault();
+    props.formOff();
+  }
   return (
     <form className="new-note-form" onSubmit={props.handleSubmit} ref={node}>
-      <div className="row input-field title-input">
-        <textarea
-          id="title-note"
-          className="materialize-textarea"
-          name="title"
-          onChange={e => props.handleChange(e)}
-          required
-          data-length="50"
-          maxLength="50"
-          key={title}
-          defaultValue={title}
-        />
-        <label htmlFor="title active" className="active">
-          Title
-        </label>
-      </div>
-      <div className="row input-field content-input">
-        <textarea
-          id="content"
-          className="materialize-textarea content-textarea"
-          name="content"
-          onChange={e => props.handleChange(e)}
-          required
-          data-length="2500"
-          maxLength="2500"
-          key={content}
-          defaultValue={content}
-          style={{ height: `${getHeight()}px` }}
-        />
-        <label htmlFor="textarea" className="active">
-          Content
-        </label>
-      </div>
-      <p className="last-update grey-text flex-end">
-        Last update: {moment(lastUpdate.toDate()).calendar()}
-      </p>
-      <div className="tools-save-container">
-        <div className="tools">
-          <i className="material-icons tool-icon" onClick={() => props.handleDelete(id)}>
-            delete
-          </i>
-          <i className="material-icons tool-icon">color_lens</i>
+      <div>
+        <div className="row input-field title-input">
+          <textarea
+            id="title-note"
+            className="materialize-textarea"
+            name="title"
+            onChange={e => props.handleChange(e)}
+            required
+            data-length="50"
+            maxLength="50"
+            key={title}
+            defaultValue={title}
+          />
         </div>
-        <button type="submit" className="save-input">
-          Save
-        </button>
+        <div className="row input-field content-input">
+          <textarea
+            id="content"
+            className="materialize-textarea content-textarea"
+            name="content"
+            onChange={e => props.handleChange(e)}
+            required
+            data-length="2500"
+            maxLength="2500"
+            key={content}
+            defaultValue={content}
+            style={{ height: `${getHeight()}px`, paddingTop: '0px' }}
+          />
+        </div>
+      </div>
+      <div>
+        <p className="last-update grey-text flex-end">
+          Last update: {moment(lastUpdate.toDate()).calendar()}
+        </p>
+        <div className="tools-save-container">
+          <div className="tools">
+            <i className="material-icons tool-icon" onClick={() => props.handleDelete(id)}>
+              delete
+            </i>
+            <i className="material-icons tool-icon">color_lens</i>
+          </div>
+          <div className="form-buttons">
+            <button type="submit" className="save-input">
+              Save
+            </button>
+            <button className="save-input" onClick={handleClose}>
+              Close
+            </button>
+          </div>
+        </div>
       </div>
     </form>
   );

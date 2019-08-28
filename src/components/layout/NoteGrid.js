@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+// import moment from 'moment';
 
 import MiniNote from './MiniNote';
 
 export default function NoteGrid({ notes, formOn }) {
-  const [sorted, setSorted] = useState(null);
+  // const [columns, setColumns] = useState(null);
   const [width, setWidth] = useState(document.documentElement.clientWidth);
 
-  useEffect(() => {
-    if (notes) {
-      let sortedNotes = notes.sort(function(n1, n2) {
-        let a = moment(n1.lastUpdate.toDate());
-        let b = moment(n2.lastUpdate.toDate());
-        if (a > b) return -1;
-        if (a < b) return 1;
-        return 0;
-      });
-      setSorted(sortedNotes);
-    }
-  }, [notes]);
+  // useEffect(() => {
+  //
+  // }, [notes]);
 
   function displayWindowSize() {
     // Get width of the window excluding scrollbars
@@ -35,15 +26,72 @@ export default function NoteGrid({ notes, formOn }) {
     return column;
   }
 
-  if (sorted && width > 1050) {
-    // let columns = 4;
+  if (notes && width < 781) {
+    let col1 = [],
+      col2 = [];
+
+    let counter = 1;
+    notes.forEach(note => {
+      if (`col${counter}` === 'col1') {
+        col1.push(note);
+      } else {
+        col2.push(note);
+      }
+
+      if (counter < 2) {
+        counter++;
+      } else {
+        counter = 1;
+      }
+    });
+
+    return (
+      <div className="notes-container">
+        <ul className="note-column">{renderNotes(col1)}</ul>
+        <ul className="note-column">{renderNotes(col2)}</ul>
+      </div>
+    );
+  }
+  if (notes && width < 1051) {
+    let col1 = [],
+      col2 = [],
+      col3 = [];
+
+    let counter = 1;
+    notes.forEach(note => {
+      if (`col${counter}` === 'col1') {
+        col1.push(note);
+      } else {
+        if (`col${counter}` === 'col2') {
+          col2.push(note);
+        } else {
+          col3.push(note);
+        }
+      }
+
+      if (counter < 3) {
+        counter++;
+      } else {
+        counter = 1;
+      }
+    });
+
+    return (
+      <div className="notes-container">
+        <ul className="note-column">{renderNotes(col1)}</ul>
+        <ul className="note-column">{renderNotes(col2)}</ul>
+        <ul className="note-column">{renderNotes(col3)}</ul>
+      </div>
+    );
+  }
+  if (notes && width > 1050) {
     let col1 = [],
       col2 = [],
       col3 = [],
       col4 = [];
 
     let counter = 1;
-    sorted.forEach(note => {
+    notes.forEach(note => {
       switch (`col${counter}`) {
         case 'col1':
           col1.push(note);
@@ -83,18 +131,19 @@ NoteGrid.propTypes = {
   formOn: PropTypes.func.isRequired
 };
 
-// return (
-//   <div className="notes-container">
-//     {sorted.map(note => {
-//       return <MiniNote note={note} key={note.id} formOn={formOn} />;
-//     })}
-//   </div>
-// );
-
-// function organizeNotes(sorted, columns) {
-//   let counter = 1;
-//   sorted.forEach(note => {
-//     setSchema({ ...schema, [`col${counter}`]: note });
-//     counter < 4 ? counter++ : (counter = 1);
+// function renderNotes(col) {
+//   const column = col.map(note => {
+//     return <MiniNote note={note} key={note.id} formOn={formOn} />;
 //   });
+//   return column;
 // }
+// if (notes) {
+//     let sortedNotes = notes.sort((n1, n2) => {
+//       let a = moment(n1.lastUpdate.toDate());
+//       let b = moment(n2.lastUpdate.toDate());
+//       if (a > b) return -1;
+//       if (a < b) return 1;
+//       return 0;
+//     });
+//     setSorted(sortedNotes);
+//   }
