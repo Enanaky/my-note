@@ -54,7 +54,7 @@ Home.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log(state.firestore.ordered.notes);
+  // console.log(state.firestore.ordered.notes);
 
   return {
     notes: state.firestore.ordered.notes,

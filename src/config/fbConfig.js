@@ -10,7 +10,8 @@ var firebaseConfig = {
   projectId: 'my-notte',
   storageBucket: '',
   messagingSenderId: '219524592815',
-  appId: '1:219524592815:web:fbbdd335a677c0fd'
+  appId: '1:219524592815:web:fbbdd335a677c0fd',
+  logErrors: false
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
