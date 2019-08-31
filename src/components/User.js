@@ -21,12 +21,20 @@ function User(props) {
         data-target="dropdown1"
         // onClick={() => console.log('user')}
       >
-        <p className="initials">{profile.initials}</p>
+        {profile.image ? (
+          <img className="user-image" src={profile.image} alt="user-image" />
+        ) : (
+          <p className="initials">{profile.initials}</p>
+        )}
       </a>
       <ul id="dropdown1" className="dropdown-content">
         <ul className="container-user">
           <div className="user-name">
-            <li>{profile.firstName + ' ' + profile.lastName}</li>
+            {profile.name ? (
+              <p className="name">{profile.name}</p>
+            ) : (
+              <li>{profile.firstName + ' ' + profile.lastName}</li>
+            )}
           </div>
           <button className="btn pink waves-effect waves-light button-logout" onClick={logOut}>
             Log out

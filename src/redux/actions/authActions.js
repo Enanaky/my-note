@@ -50,3 +50,21 @@ export const signUp = newUser => {
       });
   };
 };
+export const signUpOAuth = (uid, name, email, image) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firebase = getFirebase();
+    const firestore = getFirestore();
+
+    firestore
+      .collection('users')
+      .doc(uid)
+      .set({
+        name: name ? name : null,
+        email: email ? email : null,
+        image: image ? image : null
+      })
+
+      .catch(err => console.log(err));
+    // dispatch({ type: 'SIGNUP_ERROR', err });
+  };
+};

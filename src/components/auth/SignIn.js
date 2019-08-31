@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 
+import OAuth from './OAuth';
+
 import { signIn } from '../../redux/actions/authActions';
 
 function SignIn(props) {
-  const { authError, auth } = props;
+  const { authError, signIn, auth } = props;
   const [userInput, setUserInput] = useState({
     email: '',
     password: ''
@@ -18,7 +20,7 @@ function SignIn(props) {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    props.signIn(userInput);
+    signIn(userInput);
   }
 
   if (auth.uid) return <Redirect to="/dashboard" />;
@@ -55,6 +57,7 @@ function SignIn(props) {
             Sign Up
           </Link>
         </div>
+        <OAuth />
       </form>
     </div>
   );
@@ -62,10 +65,12 @@ function SignIn(props) {
 
 SignIn.propTypes = {
   authError: PropTypes.string,
-  auth: PropTypes.object.isRequired,
-  signIn: PropTypes.func.isRequired
+  signIn: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => {
+  // console.log(state);
+
   return {
     authError: state.auth.authError,
     auth: state.firebase.auth

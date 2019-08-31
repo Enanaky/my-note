@@ -53,14 +53,14 @@ Home.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
-  // console.log(state.firestore.ordered.notes);
+const mapStateToProps = state => {
+  console.log(state);
 
   return {
     notes: state.firestore.ordered.notes,
     auth: state.firebase.auth
   };
-}
+};
 
 export default compose(
   connect(mapStateToProps),

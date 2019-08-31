@@ -143,6 +143,9 @@ nav i.material-icons {
 }
 .dropdown-trigger {
   margin: 0 !important;
+  width: 55px;
+  height: 55px;
+  border: 1px solid rgba(136, 134, 134, 0.849);
 }
 .initials {
   text-transform: uppercase;
@@ -164,9 +167,18 @@ nav i.material-icons {
   height: 96px !important;
   padding: 5px !important;
 }
+.user-image {
+  width: 100%;
+}
 .user-name {
   display: flex;
   height: 60%;
+  justify-content: center;
+}
+.name {
+  color: black;
+  font-size: 22px;
+  align-self: center;
 }
 .button-logout {
   align-self: center;

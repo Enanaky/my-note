@@ -4,13 +4,15 @@ export function createNote(note) {
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
     const authorId = getState().firebase.auth.uid;
+    console.log(profile);
 
     firestore
       .collection('notes')
       .add({
         ...note,
-        authorFirstName: profile.firstName,
-        authorLastName: profile.lastName,
+        authorFirstName: profile.firstName ? profile.firstName : null,
+        authorLastName: profile.lastName ? profile.lastName : null,
+        authorName: profile.name ? profile.name : null,
         authorId: authorId,
         created: new Date(),
         lastUpdate: new Date()
