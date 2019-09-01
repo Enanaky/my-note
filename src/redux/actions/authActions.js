@@ -52,7 +52,6 @@ export const signUp = newUser => {
 };
 export const signUpOAuth = (uid, name, email, image) => {
   return (dispatch, getState, { getFirestore }) => {
-    // const firebase = getFirebase();
     const firestore = getFirestore();
 
     firestore

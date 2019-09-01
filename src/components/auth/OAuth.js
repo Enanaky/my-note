@@ -20,7 +20,20 @@ function OAuth(props) {
     callbacks: {
       signInSuccessWithAuthResult: profile => {
         const { uid, displayName, email, photoURL } = profile.user;
-        props.signIn(uid, displayName, email, photoURL);
+        const provider = profile.user.providerData[0].providerId;
+        let image = photoURL;
+        switch (provider) {
+          case 'twitter.com':
+            image = photoURL.replace('_normal', '');
+            break;
+          case 'facebook.com':
+            image = photoURL.concat('?height=500');
+            break;
+          default:
+            break;
+        }
+
+        props.signIn(uid, displayName, email, image);
       }
     }
   };

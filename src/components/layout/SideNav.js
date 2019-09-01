@@ -18,7 +18,7 @@ export default function SideNav({ profile }) {
         <p className="sidenav-name">{profile.name}</p>
       </li>
       <div className="divider" />
-      <li className="folders">
+      <ul className="folders">
         <li>
           <Link to="/dashboard">
             <i className="material-icons">assignment</i>
@@ -49,7 +49,7 @@ export default function SideNav({ profile }) {
             Trash
           </Link>
         </li>
-      </li>
+      </ul>
     </ul>
   );
 }

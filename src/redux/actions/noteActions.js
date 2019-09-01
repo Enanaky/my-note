@@ -4,7 +4,6 @@ export function createNote(note) {
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
     const authorId = getState().firebase.auth.uid;
-    console.log(profile);
 
     firestore
       .collection('notes')
