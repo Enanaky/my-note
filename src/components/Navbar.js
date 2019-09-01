@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import User from './User';
-
+// import logo from '../src/logo.png';
 class Navbar extends React.Component {
   state = {
     grid: true,
@@ -63,7 +63,7 @@ class Navbar extends React.Component {
           </div>
           <div className="logo">
             <Link to="/dashboard" className="logo">
-              logo
+              <img className="logo" src="../src/logo.png" alt="logo" />
             </Link>
           </div>
           <div className="nav-buttons">

@@ -113,9 +113,8 @@ body {
   color: rgb(82, 80, 80);
 }
 .logo {
-  width: 10%;
+  width: 73px;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 .nav-buttons {
@@ -319,6 +318,12 @@ i.medium {
   }
   .tool-icon {
     font-size: 43px;
+  }
+  .sidenav {
+    width: 49%;
+  }
+  .sidenav-name {
+    font-size: 26px;
   }
 }
 @media only screen and (min-width: 600px) {

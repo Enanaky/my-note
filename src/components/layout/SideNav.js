@@ -18,35 +18,37 @@ export default function SideNav({ profile }) {
         <p className="sidenav-name">{profile.name}</p>
       </li>
       <div className="divider" />
-      <li>
-        <Link to="/dashboard">
-          <i className="material-icons">assignment</i>
-          Notes
-        </Link>
-      </li>
-      <li>
-        <Link to="/personal">
-          <i className="material-icons">person_outline</i>
-          Personal
-        </Link>
-      </li>
-      <li>
-        <Link to="/work">
-          <i className="material-icons">work</i>
-          Work
-        </Link>
-      </li>
-      <li>
-        <Link to="/inspiration">
-          <i className="material-icons">brush</i>
-          Inspiration
-        </Link>
-      </li>
-      <li>
-        <Link to="/trashbag">
-          <i className="material-icons">delete</i>
-          Trash
-        </Link>
+      <li className="folders">
+        <li>
+          <Link to="/dashboard">
+            <i className="material-icons">assignment</i>
+            All
+          </Link>
+        </li>
+        <li>
+          <Link to="/personal">
+            <i className="material-icons">person_outline</i>
+            Personal
+          </Link>
+        </li>
+        <li>
+          <Link to="/work">
+            <i className="material-icons">work</i>
+            Work
+          </Link>
+        </li>
+        <li>
+          <Link to="/inspiration">
+            <i className="material-icons">brush</i>
+            Inspiration
+          </Link>
+        </li>
+        <li>
+          <Link to="/trashbag">
+            <i className="material-icons">delete</i>
+            Trash
+          </Link>
+        </li>
       </li>
     </ul>
   );
