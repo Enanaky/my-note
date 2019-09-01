@@ -8,6 +8,13 @@ body {
   /* overflow: scroll; */
   margin: 0;
 }
+@font-face {
+  font-family: nocturne;
+  src: url './fonts/Nocturne.ttf';
+  font-family: cherish;
+  src: url './fonts/CherishToday/Cherish-today.ttf';
+}
+
 .app {
   width: 100%;
   height: 100vh;
@@ -78,6 +85,22 @@ body {
 }
 .sidenav {
   top: 56px;
+  background-color: #639269;
+}
+.sidenav-image {
+  width: 100%;
+  border: 2px solid rgb(200, 209, 201);
+  border-radius: 50%;
+}
+.sidenav-name {
+  font-family: cherish;
+  text-align: center;
+  font-size: 31px;
+  color: #e0dcdc;
+  margin: 0;
+}
+.divider {
+  margin: 0 !important;
 }
 .search-bar {
   width: 100%;

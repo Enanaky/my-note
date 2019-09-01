@@ -10,7 +10,7 @@ import NewNote from './NewNote';
 import NoteGrid from './layout/NoteGrid';
 import SideNav from './layout/SideNav';
 
-function Home({ notes }) {
+function Home({ notes, profile }) {
   const [note, setNote] = useState();
   const [mustDisplayNewNote, setMustDisplayNewNote] = useState(false);
 
@@ -43,14 +43,15 @@ function Home({ notes }) {
         <NoteGrid notes={notes} formOn={formOn} />
         {/* <NoteList notes={notes} formOn={formOn} /> */}
       </div>
-      <SideNav />
+      <SideNav profile={profile} />
     </div>
   );
 }
 
 Home.propTypes = {
   notes: PropTypes.array,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
@@ -58,7 +59,8 @@ const mapStateToProps = state => {
 
   return {
     notes: state.firestore.ordered.notes,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 

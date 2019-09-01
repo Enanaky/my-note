@@ -19,8 +19,6 @@ function OAuth(props) {
     ],
     callbacks: {
       signInSuccessWithAuthResult: profile => {
-        console.log(profile);
-
         const { uid, displayName, email, photoURL } = profile.user;
         props.signIn(uid, displayName, email, photoURL);
       }
