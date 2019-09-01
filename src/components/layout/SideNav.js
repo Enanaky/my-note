@@ -12,10 +12,20 @@ export default function SideNav({ profile }) {
   return (
     <ul id="slide-out" className="sidenav">
       <li>
-        <img className="sidenav-image" src={profile.image} alt="sidenav-image" />
+        {profile.image ? (
+          <img className="sidenav-image" src={profile.image} alt="sidenav-image" />
+        ) : (
+          <div className="initials-container">
+            <p className="big-initials">{profile.initials}</p>
+          </div>
+        )}
       </li>
       <li>
-        <p className="sidenav-name">{profile.name}</p>
+        {profile.image ? (
+          <p className="sidenav-name">{profile.name}</p>
+        ) : (
+          <p className="sidenav-name">{profile.firstName + ' ' + profile.lastName}</p>
+        )}
       </li>
       <div className="divider" />
       <ul className="folders">

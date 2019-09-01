@@ -92,6 +92,19 @@ body {
   border: 2px solid rgb(200, 209, 201);
   border-radius: 50%;
 }
+.initials-container {
+  width: 100%;
+  border: 2px solid rgb(200, 209, 201);
+  border-radius: 50%;
+  height: 292px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.big-initials {
+  font-size: 166px;
+  text-transform: uppercase;
+}
 .sidenav-name {
   font-family: cherish;
   text-align: center;
@@ -171,8 +184,8 @@ nav i.material-icons {
 }
 .initials {
   text-transform: uppercase;
-  margin-top: 1px;
-  font-size: 23px;
+  margin-top: 7px;
+  font-size: 30px;
   text-align: center;
   height: 35px;
 }
@@ -310,6 +323,12 @@ i.medium {
   }
   .content-textarea {
     max-height: 537px !important;
+  }
+  .initials-container {
+    height: 244px;
+  }
+  .big-initials {
+    font-size: 120px;
   }
 }
 @media only screen and (max-width: 600px) {
