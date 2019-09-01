@@ -6,12 +6,16 @@ import { compose } from 'redux';
 
 import Navbar from './Navbar';
 import NewNote from './NewNote';
-// import NoteList from './layout/NoteList';
+import NoteList from './layout/NoteList';
 import NoteGrid from './layout/NoteGrid';
 import SideNav from './layout/SideNav';
 
 function Home({ notes, profile }) {
   const [note, setNote] = useState();
+  const [view, setView] = useState({
+    grid: true,
+    theme: 'default'
+  });
   const [mustDisplayNewNote, setMustDisplayNewNote] = useState(false);
 
   // useEffect(() => {}, [notes]);
@@ -30,18 +34,24 @@ function Home({ notes, profile }) {
     setMustDisplayNewNote(false);
     setNote();
   }
+  function changeView() {
+    view.grid === true ? setView({ ...view, grid: false }) : setView({ ...view, grid: true });
+  }
 
   return (
     <div className="home">
-      <Navbar formOn={formOn} />
+      <Navbar formOn={formOn} view={view} changeView={changeView} />
       {mustDisplayNewNote === true ? (
         <div className="new-note-container">
           <NewNote note={note} formOff={formOff} />
         </div>
       ) : null}
       <div className="dashboard">
-        <NoteGrid notes={notes} formOn={formOn} />
-        {/* <NoteList notes={notes} formOn={formOn} /> */}
+        {view.grid === true ? (
+          <NoteGrid notes={notes} formOn={formOn} />
+        ) : (
+          <NoteList notes={notes} formOn={formOn} />
+        )}
       </div>
       <SideNav profile={profile} />
     </div>

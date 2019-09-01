@@ -1,11 +1,114 @@
-#root {
-  /* overflow: hidden; */
+@media only screen and (max-width: 520px) {
+  .note-grid {
+    width: 100%;
+    min-height: 94px !important;
+    font-size: 10px;
+  }
+  .content-textarea {
+    max-height: 537px !important;
+  }
+  .initials-container {
+    height: 244px;
+  }
+  .big-initials {
+    font-size: 120px;
+  }
+  .note-list {
+    width: 95%;
+  }
+  .note-column {
+    width: 47vw !important;
+  }
+  .new-note-container {
+    margin-top: 56px;
+  }
+  .new-note {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+  }
+  .new-note-form {
+    height: 90%;
+  }
+}
+@media only screen and (min-width: 500px) {
+  .tool-icon {
+    font-size: 43px;
+  }
+  .sidenav {
+    width: 49%;
+  }
+  .sidenav-name {
+    font-size: 26px;
+  }
+  .note-list {
+    width: 90%;
+  }
+  .note-column {
+    width: 231px;
+  }
+  .new-note-container {
+    margin-top: 56px;
+  }
+  .new-note {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+  }
+  .new-note-form {
+    height: 90%;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .note-list {
+    width: 80%;
+  }
+  .note-column {
+    width: 231px;
+  }
+  .new-note {
+    width: 80%;
+    margin: 30px auto 17px auto;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .new-note {
+    width: 69%;
+    margin: 30px auto 17px auto;
+  }
+  .note-list {
+    width: 70%;
+  }
+  .new-note {
+    width: 60%;
+    margin: 10% auto;
+    height: auto;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .new-note {
+    width: 55%;
+    margin: 30px auto 17px auto;
+  }
+  .note-list {
+    width: 60%;
+  }
+  .new-note {
+    width: 70%;
+    margin: 10% auto;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .new-note {
+    width: 43%;
+    margin: 30px auto 17px auto;
+  }
 }
 html {
   margin: 0;
 }
 body {
-  /* overflow: scroll; */
   margin: 0;
 }
 @font-face {
@@ -24,9 +127,8 @@ body {
 .home {
   display: flex;
   flex-direction: column;
-  /* overflow: hidden; */
 }
-/*----------- SIGN-FORMS ------------*/
+/*----------- Auth-FORMS ------------*/
 .container {
   display: flex;
   flex-direction: column;
@@ -61,7 +163,6 @@ body {
   display: flex;
   justify-content: space-evenly;
 }
-
 /*----------- NAVBAR ------------*/
 .nav-wrapper {
   display: flex;
@@ -232,9 +333,6 @@ nav i.material-icons {
 .new-note {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: 0;
-  height: 100%;
 }
 .new-note-form {
   display: flex;
@@ -315,60 +413,6 @@ i.medium {
   height: 100%;
   background-color: #b6f3af;
 }
-@media only screen and (max-width: 520px) {
-  .note {
-    width: 215px !important;
-    min-height: 94px !important;
-    font-size: 10px;
-  }
-  .content-textarea {
-    max-height: 537px !important;
-  }
-  .initials-container {
-    height: 244px;
-  }
-  .big-initials {
-    font-size: 120px;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .new-note-form {
-    height: 100%;
-  }
-  .tool-icon {
-    font-size: 43px;
-  }
-  .sidenav {
-    width: 49%;
-  }
-  .sidenav-name {
-    font-size: 26px;
-  }
-}
-@media only screen and (min-width: 600px) {
-  .new-note {
-    width: 80%;
-    margin: 30px auto 17px auto;
-  }
-}
-@media only screen and (min-width: 768px) {
-  .new-note {
-    width: 69%;
-    margin: 30px auto 17px auto;
-  }
-}
-@media only screen and (min-width: 992px) {
-  .new-note {
-    width: 55%;
-    margin: 30px auto 17px auto;
-  }
-}
-@media only screen and (min-width: 1200px) {
-  .new-note {
-    width: 43%;
-    margin: 30px auto 17px auto;
-  }
-}
 /*----------- Dashboard ------------*/
 .dashboard {
   display: flex;
@@ -376,7 +420,7 @@ i.medium {
   align-items: center;
   overflow: scroll !important;
 }
-/*----------- Note List ------------*/
+/*----------- Note Grid ------------*/
 .notes-container {
   height: 100%;
   display: flex;
@@ -384,12 +428,16 @@ i.medium {
   justify-content: center;
   margin: 0;
 }
-.note {
+.note-column {
+  margin: 10px 5px;
+  width: 231px;
+}
+.note-grid {
   background-color: #fffbfb;
   border: 1px solid rgb(187, 186, 186);
   border-radius: 5px;
   min-height: 100px;
-  width: 250px;
+  width: 100%;
   height: fit-content;
   word-wrap: break-word;
   margin: 0.667%;
@@ -397,24 +445,65 @@ i.medium {
   cursor: pointer;
   margin: 0 4px 8px 4px;
 }
-.note:hover {
+.note-grid:hover {
   box-shadow: 2px 2px 13px 3px rgb(1, 7, 1);
 }
-.note-inner {
+.note-inner-grid {
   display: flex;
   flex-direction: column;
   font-family: 'Roboto', arial, sans-serif;
   padding: 5px;
 }
-.note-title {
+.note-title-grid {
   margin: 5px 0 10px 0;
   font-weight: bold;
   border-bottom: 1px solid #bbbaba;
 }
-.note-content {
+.note-content-grid {
   color: black;
   resize: none;
-  /* overflow: hidden; */
+  border: none;
+  letter-spacing: 0.01428571em;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 0.875rem;
+  min-height: 45px !important;
+  max-height: 400px !important;
+  cursor: pointer;
+}
+/*----------- Note List ------------*/
+.note-list-ul {
+  width: 100vw;
+}
+.note-list {
+  background-color: #fffbfb;
+  border: 1px solid rgb(187, 186, 186);
+  border-radius: 5px;
+  min-height: 100px;
+  /* width: 100%; */
+  height: fit-content;
+  word-wrap: break-word;
+  margin: 0.667%;
+  box-shadow: 2px 3px 4px 0px rgba(16, 16, 16, 0.7);
+  cursor: pointer;
+  margin: 0 auto 8px auto;
+}
+.note-list:hover {
+  box-shadow: 2px 2px 13px 3px rgb(1, 7, 1);
+}
+.note-inner-list {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', arial, sans-serif;
+  padding: 5px;
+}
+.note-title-list {
+  margin: 5px 0 10px 0;
+  font-weight: bold;
+  border-bottom: 1px solid #bbbaba;
+}
+.note-content-list {
+  color: black;
+  resize: none;
   border: none;
   letter-spacing: 0.01428571em;
   font-family: Roboto, Arial, sans-serif;

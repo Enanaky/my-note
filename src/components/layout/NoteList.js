@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 
 import MiniNote from './MiniNote';
 
-export default function NoteList(props) {
-  const { notes, newNoteOn } = props;
+export default function NoteList({ notes, formOn }) {
   return (
     <div className="notes-container">
-      <ul className="note-list">
+      <ul className="note-list-ul">
         {notes &&
           notes.map(note => {
-            return <MiniNote note={note} key={note.id} newNoteOn={newNoteOn} />;
+            return <MiniNote note={note} key={note.id} formOn={formOn} view="list" />;
           })}
       </ul>
     </div>
@@ -19,5 +18,5 @@ export default function NoteList(props) {
 
 NoteList.propTypes = {
   notes: PropTypes.array,
-  newNoteOn: PropTypes.func.isRequired
+  formOn: PropTypes.func.isRequired
 };

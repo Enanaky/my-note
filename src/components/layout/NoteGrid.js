@@ -5,23 +5,17 @@ import PropTypes from 'prop-types';
 import MiniNote from './MiniNote';
 
 export default function NoteGrid({ notes, formOn }) {
-  // const [columns, setColumns] = useState(null);
   const [width, setWidth] = useState(document.documentElement.clientWidth);
-
-  // useEffect(() => {
-  //
-  // }, [notes]);
+  window.addEventListener('resize', displayWindowSize);
 
   function displayWindowSize() {
     // Get width of the window excluding scrollbars
     setWidth(document.documentElement.clientWidth);
   }
 
-  window.addEventListener('resize', displayWindowSize);
-
   function renderNotes(col) {
     const column = col.map(note => {
-      return <MiniNote note={note} key={note.id} formOn={formOn} />;
+      return <MiniNote note={note} key={note.id} formOn={formOn} view="grid" />;
     });
     return column;
   }

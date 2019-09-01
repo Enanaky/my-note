@@ -15,12 +15,17 @@ export default function MiniNote(props) {
     return base + Math.floor(content.length / 63 + intro) * 18;
   }
 
+  const container = `note-${props.view}`;
+  const inner = `note-inner-${props.view}`;
+  const classTitle = `note-title-${props.view}`;
+  const classContent = `note-content-${props.view}`;
+
   return (
-    <div className="note" key={title} onClick={() => props.formOn(id)}>
-      <div className="note-inner">
-        <p className="note-title">{title}</p>
+    <div className={container} key={title} onClick={() => props.formOn(id)}>
+      <div className={inner}>
+        <p className={classTitle}>{title}</p>
         <textarea
-          className="note-content"
+          className={classContent}
           value={content}
           readOnly
           disabled
@@ -33,5 +38,6 @@ export default function MiniNote(props) {
 
 MiniNote.propTypes = {
   note: PropTypes.object.isRequired,
-  formOn: PropTypes.func.isRequired
+  formOn: PropTypes.func.isRequired,
+  view: PropTypes.string.isRequired
 };
