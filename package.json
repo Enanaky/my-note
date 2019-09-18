@@ -1,8 +1,11 @@
 {
   "name": "my-note",
+  "homepage": "http://enanaky.github.io/my-note",
   "description": "A note web SPA with react, redux, and firebase",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.dev.js --port 3000"
+    "start": "webpack-dev-server --config webpack.config.dev.js --port 3000",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "bootstrap": "4.3.1",
@@ -35,6 +38,7 @@
     "eslint-loader": "2.1.2",
     "eslint-plugin-import": "2.16.0",
     "eslint-plugin-react": "7.12.4",
+    "gh-pages": "^2.1.1",
     "html-webpack-plugin": "3.2.0",
     "http-server": "0.11.1",
     "jest": "24.5.0",
