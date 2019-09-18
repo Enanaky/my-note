@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import User from './User';
 // import logo from '../src/logo.png';
 function Navbar({ formOn, view, changeView }) {
-  const changeMode = () => {};
-
   return (
     <>
       <nav className="nav-wrapper">
@@ -17,21 +15,53 @@ function Navbar({ formOn, view, changeView }) {
         </div>
         <div className="logo">
           <Link to="/dashboard" className="logo">
-            <img className="logo" src="../src/logo.png" alt="logo" />
+            <img className="lobo" src="../src/lala.png" alt="logo" />
           </Link>
         </div>
         <div className="nav-buttons">
-          <a className="button-icon">
+          <a className="button-icon tooltip">
             <i className="large material-icons" onClick={() => formOn()}>
               add
             </i>
+            <p
+              className="tooltiptext"
+              style={{
+                backgroundColor: '#7b7a7a',
+                color: 'white',
+                width: '99px',
+                height: '28px',
+                textAlign: 'center',
+                margin: '0px',
+                font: '-webkit-small-control',
+                fontSize: '15px',
+                top: '47px'
+              }}
+            >
+              Create a note
+            </p>
           </a>
-          <a onClick={() => changeView()} className="a-icon view">
+          <a onClick={() => changeView()} className="a-icon view tooltip">
             {view.grid === true ? (
               <i className="large material-icons list">view_stream</i>
             ) : (
               <i className="large material-icons grid">view_module</i>
             )}
+            <p
+              className="tooltiptext"
+              style={{
+                backgroundColor: '#7b7a7a',
+                color: 'white',
+                width: '99px',
+                height: '28px',
+                textAlign: 'center',
+                margin: '0px',
+                font: '-webkit-small-control',
+                fontSize: '15px',
+                top: '47px'
+              }}
+            >
+              Change view
+            </p>
           </a>
           <User />
         </div>

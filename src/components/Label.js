@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { updateLabel } from '../redux/actions/noteActions';
 import PropTypes from 'prop-types';
 
-function Label({ id, changeLabel }) {
+function Label({ id, changeLabel, selected }) {
   useEffect(() => {
     //Colors
     const elems = document.querySelectorAll('.fixed-action-btn');
@@ -23,14 +23,35 @@ function Label({ id, changeLabel }) {
 
   function getLabels() {
     return labels.map(item => {
-      return (
-        <li key={item.label}>
-          <a className="btn-floating" onClick={() => changeLabel(id, item.label)}>
-            <i className="material-icons">{item.icon}</i>
-          </a>
-          <p className="label-p">{item.label}</p>
-        </li>
-      );
+      if (item.label === selected) {
+        return (
+          <li key={item.label} style={{ backgroundColor: '#989494' }}>
+            <a className="btn-floating" onClick={() => changeLabel(id, item.label)}>
+              <i
+                className="material-icons icon-label"
+                style={{ backgroundColor: 'transparent', color: '#f3eded' }}
+              >
+                {item.icon}
+              </i>
+            </a>
+            <p className="label-p">{item.label}</p>
+          </li>
+        );
+      } else {
+        return (
+          <li key={item.label}>
+            <a className="btn-floating" onClick={() => changeLabel(id, item.label)}>
+              <i
+                className="material-icons icon-label"
+                style={{ backgroundColor: 'transparent', color: '#f3eded' }}
+              >
+                {item.icon}
+              </i>
+            </a>
+            <p className="label-p">{item.label}</p>
+          </li>
+        );
+      }
     });
   }
 
@@ -44,7 +65,8 @@ function Label({ id, changeLabel }) {
 
 Label.propTypes = {
   id: PropTypes.string,
-  changeLabel: PropTypes.func.isRequired
+  changeLabel: PropTypes.func.isRequired,
+  selected: PropTypes.string
 };
 
 const mapDispatchToProps = dispatch => {

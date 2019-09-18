@@ -5,7 +5,7 @@ import Colors from '../Colors';
 import Label from '../Label';
 
 export default function EditNoteForm(props) {
-  const { title, content, lastUpdate, id, color } = props.note;
+  const { title, content, lastUpdate, id, color, label } = props.note;
   const node = useRef();
   let background = color;
 
@@ -90,10 +90,13 @@ export default function EditNoteForm(props) {
         <div className="tools-save-container">
           <div className="tools">
             <Colors id={id} />
-            <Label id={id} />
-            <i className="material-icons tool-icon" onClick={() => props.handleDelete(id)}>
-              delete
-            </i>
+            <Label id={id} selected={label} />
+            <div className="tooltip">
+              <i className="material-icons tool-icon" onClick={() => props.handleDelete(id)}>
+                delete
+              </i>
+              <span className="tooltiptext">Delete note</span>
+            </div>
           </div>
           <div className="form-buttons">
             <button type="submit" className="save-input">

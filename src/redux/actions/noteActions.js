@@ -16,7 +16,7 @@ export function createNote(note) {
         created: new Date(),
         lastUpdate: new Date(),
         color: '#ffffff',
-        label: 'null'
+        label: 'None'
       })
       .then(() => {
         dispatch({ type: 'CREATE_NOTE', note });
