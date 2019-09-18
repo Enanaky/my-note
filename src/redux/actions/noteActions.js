@@ -75,8 +75,6 @@ export function updateColor(id, color) {
         lastUpdate: new Date()
       })
       .then(() => {
-        console.log('color updated in note: ', id);
-
         dispatch({ type: 'CHANGE_COLOR', id });
       })
       .catch(err => {
@@ -96,8 +94,6 @@ export function updateLabel(id, label) {
         lastUpdate: new Date()
       })
       .then(() => {
-        console.log('label changed in note: ', id);
-
         dispatch({ type: 'CHANGE_LABEL', id });
       })
       .catch(err => {

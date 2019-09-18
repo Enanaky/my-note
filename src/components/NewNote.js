@@ -53,8 +53,6 @@ function NewNote(props) {
       updateChanges(props.note.note.id, form);
     } else {
       //if it's a new note then create one...
-      console.log('Submiting form...');
-
       event.preventDefault();
       props.create(form);
       props.formOff();
@@ -63,12 +61,10 @@ function NewNote(props) {
 
   function updateChanges(id, changes) {
     props.formOff();
-    console.log('updating note: ', id);
     props.update(id, changes);
   }
 
   function handleDelete(id) {
-    console.log('deleting note: ', id);
     props.formOff();
     props.delete(id);
   }
