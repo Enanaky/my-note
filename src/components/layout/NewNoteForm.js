@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+// import Colors from '../Colors';
 
 export default function NewNoteForm({ handleSubmit, handleChange, formOff }) {
   const node = useRef();
@@ -61,9 +62,7 @@ export default function NewNoteForm({ handleSubmit, handleChange, formOff }) {
       </div>
       <div className="save-input-button">
         <div className="tools-save-container">
-          <div className="tools">
-            <i className="material-icons tool-icon">color_lens</i>
-          </div>
+          <div className="tools">{/* <Colors /> */}</div>
           <div className="form-buttons">
             <button type="submit" className="save-input">
               Save

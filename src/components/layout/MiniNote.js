@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function MiniNote(props) {
-  const { title, content, id } = props.note;
+  const { title, content, id, color } = props.note;
 
   function getHeight() {
     let intro = 0;
@@ -21,7 +21,12 @@ export default function MiniNote(props) {
   const classContent = `note-content-${props.view}`;
 
   return (
-    <div className={container} key={title} onClick={() => props.formOn(id)}>
+    <div
+      className={container}
+      key={title}
+      onClick={() => props.formOn(id)}
+      style={{ backgroundColor: color }}
+    >
       <div className={inner}>
         <p className={classTitle}>{title}</p>
         <textarea

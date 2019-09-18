@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import Colors from '../Colors';
+import Label from '../Label';
 
 export default function EditNoteForm(props) {
-  const { title, content, lastUpdate, id } = props.note;
+  const { title, content, lastUpdate, id, color } = props.note;
   const node = useRef();
+  let background = color;
 
   useEffect(() => {
     const counter = document.querySelectorAll('textarea#title-note,textarea#content');
@@ -43,8 +46,14 @@ export default function EditNoteForm(props) {
     e.preventDefault();
     props.formOff();
   }
+
   return (
-    <form className="new-note-form" onSubmit={props.handleSubmit} ref={node}>
+    <form
+      className="new-note-form"
+      style={{ backgroundColor: background }}
+      onSubmit={props.handleSubmit}
+      ref={node}
+    >
       <div>
         <div className="row input-field title-input">
           <textarea
@@ -80,10 +89,11 @@ export default function EditNoteForm(props) {
         </p>
         <div className="tools-save-container">
           <div className="tools">
+            <Colors id={id} />
+            <Label id={id} />
             <i className="material-icons tool-icon" onClick={() => props.handleDelete(id)}>
               delete
             </i>
-            <i className="material-icons tool-icon">color_lens</i>
           </div>
           <div className="form-buttons">
             <button type="submit" className="save-input">

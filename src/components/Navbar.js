@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 import User from './User';
 // import logo from '../src/logo.png';
 function Navbar({ formOn, view, changeView }) {
-  //CHANGE THE VIEW MODEL GRID vs LIST
-
-  //CHANGE THE DARKMODE
   const changeMode = () => {};
 
   return (
@@ -17,13 +14,6 @@ function Navbar({ formOn, view, changeView }) {
           <a href="#" className="sidenav-trigger" data-target="slide-out">
             <i className="large material-icons menu-icon">menu</i>
           </a>
-          <div className="input-field search-bar">
-            <form className="search-bar">
-              <i className="large material-icons menu-icon">search</i>
-              <input id="search" type="search" required />
-              <i className="material-icons">close</i>
-            </form>
-          </div>
         </div>
         <div className="logo">
           <Link to="/dashboard" className="logo">
@@ -42,9 +32,6 @@ function Navbar({ formOn, view, changeView }) {
             ) : (
               <i className="large material-icons grid">view_module</i>
             )}
-          </a>
-          <a onClick={changeMode} className="mode-icon">
-            <i className="large material-icons view-icon dark">visibility</i>
           </a>
           <User />
         </div>

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function SideNav({ profile }) {
+export default function SideNav({ profile, labelNotes }) {
   useEffect(() => {
     var elems = document.querySelector('.sidenav');
     // eslint-disable-next-line no-undef
@@ -30,34 +29,28 @@ export default function SideNav({ profile }) {
       <div className="divider" />
       <ul className="folders">
         <li>
-          <Link to="/dashboard">
+          <a onClick={() => labelNotes('All')}>
             <i className="material-icons">assignment</i>
             All
-          </Link>
+          </a>
         </li>
         <li>
-          <Link to="/personal">
+          <a onClick={() => labelNotes('Personal')}>
             <i className="material-icons">person_outline</i>
             Personal
-          </Link>
+          </a>
         </li>
         <li>
-          <Link to="/work">
+          <a onClick={() => labelNotes('Work')}>
             <i className="material-icons">work</i>
             Work
-          </Link>
+          </a>
         </li>
         <li>
-          <Link to="/inspiration">
+          <a onClick={() => labelNotes('Inspiration')}>
             <i className="material-icons">brush</i>
             Inspiration
-          </Link>
-        </li>
-        <li>
-          <Link to="/trashbag">
-            <i className="material-icons">delete</i>
-            Trash
-          </Link>
+          </a>
         </li>
       </ul>
     </ul>
@@ -65,5 +58,6 @@ export default function SideNav({ profile }) {
 }
 
 SideNav.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  labelNotes: PropTypes.func.isRequired
 };

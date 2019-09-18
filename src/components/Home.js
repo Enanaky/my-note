@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -17,8 +17,11 @@ function Home({ notes, profile }) {
     theme: 'default'
   });
   const [mustDisplayNewNote, setMustDisplayNewNote] = useState(false);
+  const [labeledNotes, setLabeledNotes] = useState();
 
-  // useEffect(() => {}, [notes]);
+  useEffect(() => {
+    setLabeledNotes(notes);
+  }, [notes]);
 
   function formOn(id) {
     notes
@@ -37,7 +40,16 @@ function Home({ notes, profile }) {
   function changeView() {
     view.grid === true ? setView({ ...view, grid: false }) : setView({ ...view, grid: true });
   }
-
+  function labelNotes(label) {
+    switch (label) {
+      case 'All':
+        setLabeledNotes(notes);
+        break;
+      default:
+        setLabeledNotes(notes.filter(note => note.label === label));
+        break;
+    }
+  }
   return (
     <div className="home">
       <Navbar formOn={formOn} view={view} changeView={changeView} />
@@ -47,13 +59,15 @@ function Home({ notes, profile }) {
         </div>
       ) : null}
       <div className="dashboard">
-        {view.grid === true ? (
-          <NoteGrid notes={notes} formOn={formOn} />
-        ) : (
-          <NoteList notes={notes} formOn={formOn} />
-        )}
+        {labeledNotes != undefined ? (
+          view.grid === true ? (
+            <NoteGrid notes={labeledNotes} formOn={formOn} />
+          ) : (
+            <NoteList notes={labeledNotes} formOn={formOn} />
+          )
+        ) : null}
       </div>
-      <SideNav profile={profile} />
+      <SideNav profile={profile} labelNotes={labelNotes} />
     </div>
   );
 }
@@ -65,7 +79,7 @@ Home.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
+  // console.log(state.firestore.ordered.notes);
 
   return {
     notes: state.firestore.ordered.notes,

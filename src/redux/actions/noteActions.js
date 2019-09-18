@@ -14,7 +14,9 @@ export function createNote(note) {
         authorName: profile.name ? profile.name : null,
         authorId: authorId,
         created: new Date(),
-        lastUpdate: new Date()
+        lastUpdate: new Date(),
+        color: '#ffffff',
+        label: 'null'
       })
       .then(() => {
         dispatch({ type: 'CREATE_NOTE', note });
@@ -58,6 +60,48 @@ export function updateNote(id, changes) {
       })
       .catch(err => {
         dispatch({ type: 'UPDATE_NOTE_ERROR', err });
+      });
+  };
+}
+export function updateColor(id, color) {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection('notes')
+      .doc(id)
+      .update({
+        color: color,
+        lastUpdate: new Date()
+      })
+      .then(() => {
+        console.log('color updated in note: ', id);
+
+        dispatch({ type: 'CHANGE_COLOR', id });
+      })
+      .catch(err => {
+        dispatch({ type: 'CHANGE_COLOR_ERROR', err });
+      });
+  };
+}
+export function updateLabel(id, label) {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection('notes')
+      .doc(id)
+      .update({
+        label: label,
+        lastUpdate: new Date()
+      })
+      .then(() => {
+        console.log('label changed in note: ', id);
+
+        dispatch({ type: 'CHANGE_LABEL', id });
+      })
+      .catch(err => {
+        dispatch({ type: 'CHANGE_LABEL_ERROR', err });
       });
   };
 }

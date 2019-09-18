@@ -53,9 +53,17 @@ function SignIn(props) {
           <button type="submit" className="btn pink waves-effect">
             Login
           </button>
-          <Link to="/signUp" className="btn pink waves-effect">
-            Sign Up
-          </Link>
+          <div
+            style={{
+              display: 'flex',
+              width: '220px',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}
+          >
+            <p>Don&apos;t have an Account? </p>
+            <Link to="/signUp"> Sign Up</Link>
+          </div>
         </div>
         <OAuth />
       </form>

@@ -7,6 +7,7 @@ import { logOutAction } from '../redux/actions/authActions';
 
 function User(props) {
   const { logOut, auth, profile } = props;
+
   useEffect(() => {
     let dropdown = document.querySelector('.dropdown-trigger');
     // eslint-disable-next-line no-undef

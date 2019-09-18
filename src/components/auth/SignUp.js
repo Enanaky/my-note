@@ -99,13 +99,24 @@ class SignUp extends Component {
           <div className="red-text center">
             {this.props.authError ? <p>{this.props.authError}</p> : null}
           </div>
-          <div className="input-field" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+          <div
+            className="input-field"
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+          >
             <button className="btn pink waves-effect waves-light lighten-1 z-depth-0">
-              Sign Up
+              Create Account
             </button>
-            <Link to="/" className="btn pink waves-effect waves-light lighten-1 z-depth-0">
-              Log in
-            </Link>
+            <div
+              style={{
+                display: 'flex',
+                width: '223px',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+              <p>Already have an Account? </p>
+              <Link to="/">Log in</Link>
+            </div>
           </div>
         </form>
       </div>
