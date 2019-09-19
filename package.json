@@ -4,6 +4,9 @@
   "description": "A note web SPA with react, redux, and firebase",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js --port 3000",
+    "clean:build": "rimraf ./build && mkdir build",
+    "prebuild": "npm run clean:build",
+    "build": "webpack --config webpack.config.prod.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
