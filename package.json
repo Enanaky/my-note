@@ -8,7 +8,9 @@
     "prebuild": "npm run clean:build",
     "build": "webpack --config webpack.config.prod.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "postdeploy": "npm run serve:build",
+    "serve:build": "http-server ./build"
   },
   "dependencies": {
     "bootstrap": "4.3.1",
