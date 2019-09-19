@@ -1,27 +1,4 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from './reducers/rootReducer';
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'; //This is useful only on development
-import thunk from 'redux-thunk';
-import { reduxFirestore, getFirestore } from 'redux-firestore';
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
-import fbConfig from '../config/fbConfig';
-
-export default function configureStore() {
-  const composes = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //This is useful only on development
-
-  return createStore(
-    rootReducer,
-    composes(
-      applyMiddleware(
-        thunk.withExtraArgument({ getFirebase, getFirestore }),
-        reduxImmutableStateInvariant()
-      ),
-      reduxFirestore(fbConfig),
-      reactReduxFirebase(fbConfig, {
-        useFirestoreForProfile: true,
-        userProfile: 'users',
-        attachAuthIsReady: true
-      })
-    )
-  );
-}
+// Dinamically import during build-time
+process.env.NODE_ENV === 'production'
+  ? (module.exports = require('./configureStore.prod'))
+  : (module.exports = require('./configureStore.dev'));
