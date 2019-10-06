@@ -68,9 +68,9 @@ function SignIn(props) {
         </div>
         <OAuth />
         <div className="tecs">
-          <img className="tec" src=".media/react-logo.png" alt="react" />
-          <img className="tec" src=".media/redux-logo.png" alt="redux" />
-          <img className="tec" src=".media/firebase-logo.png" alt="firebase" />
+          <img className="tec" src="./media/react-logo.png" alt="react" />
+          <img className="tec" src="./media/redux-logo.png" alt="redux" />
+          <img className="tec" src="./media/firebase-logo.png" alt="firebase" />
         </div>
       </form>
     </div>
