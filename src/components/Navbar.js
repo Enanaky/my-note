@@ -15,7 +15,7 @@ function Navbar({ formOn, view, changeView }) {
         </div>
         <div className="logo">
           <Link to="/dashboard" className="logo">
-            <img className="lobo" src="../src/lala.png" alt="logo" />
+            <img className="lobo" src="../src/media/lago.png" alt="logo" />
           </Link>
         </div>
         <div className="nav-buttons">

@@ -28,7 +28,7 @@ function SignIn(props) {
     <div className="container">
       <form className="white signIn-form" id="form" onSubmit={handleSubmit}>
         {/* <h5 className="grey-text text-darken-3 center">Login</h5> */}
-        <img className="logo" src="../src/lolo.png" alt="logo" />
+        <img className="logo" src="../src/media/logo.png" alt="logo" />
         <div className="row input-container email">
           <i className="small material-icons col 2">mail</i>
           <div className="input-field email col s11">
@@ -68,9 +68,9 @@ function SignIn(props) {
         </div>
         <OAuth />
         <div className="tecs">
-          <img className="tec" src="../src/react-logo.png" alt="react" />
-          <img className="tec" src="../src/redux-logo.png" alt="redux" />
-          <img className="tec" src="../src/firebase-logo.png" alt="firebase" />
+          <img className="tec" src="../src/media/react-logo.png" alt="react" />
+          <img className="tec" src="../src/media/redux-logo.png" alt="redux" />
+          <img className="tec" src="../src/media/firebase-logo.png" alt="firebase" />
         </div>
       </form>
     </div>
