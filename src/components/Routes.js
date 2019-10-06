@@ -7,7 +7,7 @@ import Home from './Home';
 
 export default function Routes() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL + '/'}>
+    <BrowserRouter basename={'/my-note/'}>
       <Switch>
         <Route exact path="/" component={SignIn} />
         <Route path="/signup" component={SignUp} />
