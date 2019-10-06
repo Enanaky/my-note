@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpackBundleAnalyzer = require('webpack-bundle-analyzer');
 
 process.env.NODE_ENV = 'development';
 
@@ -27,6 +28,8 @@ module.exports = {
       template: 'src/index.html',
       favicon: 'src/favicon.ico'
     })
+    //Display bundle stats
+    // new webpackBundleAnalyzer.BundleAnalyzerPlugin({ analyzerMode: 'static' })
   ],
   module: {
     rules: [

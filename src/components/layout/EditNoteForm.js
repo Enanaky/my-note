@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+// import moment from 'moment/min/locales';
 import Colors from '../Colors';
 import Label from '../Label';
 

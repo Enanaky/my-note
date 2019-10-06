@@ -5,7 +5,8 @@ import configureStore from './redux/configureStore';
 import { Provider } from 'react-redux';
 
 import './index.css';
-const App = React.lazy(() => import('./components/App'));
+// const App = React.lazy(() => import('./components/App'));
+import App from './components/App';
 
 const store = configureStore();
 
